@@ -310,8 +310,14 @@ export default function CrateCvPage() {
                           ))}
                       </ul>
                        <div className="mt-4 pt-4 border-t">
-                          <h4 className="font-headline text-xl flex items-center gap-2 mb-2"><Languages className="text-primary h-5 w-5"/> Languages</h4>
-                          <p>English</p>
+                          <h4 className="font-headline text-xl flex items-center gap-2 mb-3"><Languages className="text-primary h-5 w-5"/> Languages</h4>
+                          <div className="flex items-start gap-3">
+                            <ChevronsRight className="h-4 w-4 text-primary mt-1 shrink-0"/>
+                            <div>
+                                <p className="font-semibold">English</p>
+                                <p className="text-sm text-muted-foreground">Professional Working Proficiency</p>
+                            </div>
+                          </div>
                       </div>
                   </CardContent>
               </Card>
