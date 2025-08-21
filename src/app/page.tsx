@@ -231,14 +231,6 @@ export default function CrateCvPage() {
                     ))}
                   </CardContent>
               </Card>
-              <Card className="shadow-lg">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="font-headline text-xl flex items-center gap-2"><Languages className="text-primary h-5 w-5"/> Languages</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p>English</p>
-                  </CardContent>
-              </Card>
             </div>
           </div>
 
@@ -317,6 +309,10 @@ export default function CrateCvPage() {
                               </li>
                           ))}
                       </ul>
+                       <div className="mt-4 pt-4 border-t">
+                          <h4 className="font-headline text-xl flex items-center gap-2 mb-2"><Languages className="text-primary h-5 w-5"/> Languages</h4>
+                          <p>English</p>
+                      </div>
                   </CardContent>
               </Card>
               <Card className="shadow-lg">
