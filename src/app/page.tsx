@@ -311,7 +311,7 @@ export default function CrateCvPage() {
                       </ul>
                        <div className="mt-4 pt-4 border-t">
                           <h4 className="font-headline text-xl flex items-center gap-2 mb-3"><Languages className="text-primary h-5 w-5"/> Languages</h4>
-                          <div className="flex items-start gap-3">
+                           <div className="flex items-start gap-3">
                             <ChevronsRight className="h-4 w-4 text-primary mt-1 shrink-0"/>
                             <div>
                                 <p className="font-semibold">English</p>
@@ -398,6 +398,20 @@ export default function CrateCvPage() {
               </Form>
             </CardContent>
           </Card>
+
+          <Card className="shadow-lg">
+            <CardHeader>
+              <CardTitle className="font-headline text-3xl">Badges</CardTitle>
+            </CardHeader>
+            <CardContent className="flex flex-wrap gap-4 items-center">
+              <a href="https://holopin.io/@raflimaulanarizki" target="_blank" rel="noopener noreferrer">
+                <img src="https://holopin.me/raflimaulanarizki" alt="An image of @raflimaulanarizki's Holopin badges, which is a link to view their full Holopin profile" />
+              </a>
+              <a href="https://ipv6.he.net/certification/" target="_blank" rel="noopener noreferrer">
+                <img src="https://ipv6.he.net/certification/create_badge.php?pass_name=raflimaulanarizki&badge=2" alt="IPv6 Certification Badge" />
+              </a>
+            </CardContent>
+          </Card>
         </div>
       </main>
 
@@ -420,5 +434,3 @@ export default function CrateCvPage() {
     </div>
   );
 }
-
-    
