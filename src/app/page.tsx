@@ -244,7 +244,7 @@ export default function CrateCvPage() {
             </Card>
           </div>
 
-          <Card className="shadow-lg">
+          <Card id="experience" className="shadow-lg">
             <CardHeader>
               <CardTitle className="font-headline text-2xl md:text-3xl flex items-center gap-3"><Briefcase className="text-primary"/> Experience</CardTitle>
             </CardHeader>
@@ -279,7 +279,7 @@ export default function CrateCvPage() {
             </CardContent>
           </Card>
           
-          <Card className="shadow-lg">
+          <Card id="skills" className="shadow-lg">
               <CardHeader>
                 <CardTitle className="font-headline text-2xl md:text-3xl flex items-center gap-3"><ShieldCheck className="text-primary"/> Technical Skills</CardTitle>
               </CardHeader>
@@ -299,7 +299,7 @@ export default function CrateCvPage() {
 
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <Card className="shadow-lg">
+              <Card id="achievements" className="shadow-lg">
                   <CardHeader>
                       <CardTitle className="font-headline text-2xl md:text-3xl flex items-center gap-3"><Award className="text-primary" /> Achievements</CardTitle>
                   </CardHeader>
@@ -321,7 +321,7 @@ export default function CrateCvPage() {
                       </ul>
                   </CardContent>
               </Card>
-              <Card className="shadow-lg">
+              <Card id="certifications" className="shadow-lg">
                   <CardHeader>
                       <CardTitle className="font-headline text-2xl md:text-3xl flex items-center gap-3"><CheckCircle className="text-primary" /> Certifications</CardTitle>
                   </CardHeader>
