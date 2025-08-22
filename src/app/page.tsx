@@ -223,7 +223,7 @@ export default function CrateCvPage() {
             </CardHeader>
             <CardContent>
               <p className="text-sm md:text-base leading-relaxed">
-                My name is Rafli, I graduated from the network information systems and applications in 2023. I have a character who always wants to try new things, and always tries to work hard and is responsible for maximizing what I do. Able to work with a team or individually. very easy to socialize.
+              Network & System Engineer with 2+ years of hands-on experience in designing, deploying, and maintaining enterprise networks across multi-vendor environments (Mikrotik, Cisco, Juniper, Ruijie, Ubiquiti). Skilled in data center networking, IPv6 deployment, network monitoring, and system administration (Linux, Proxmox, VMware). Proven track record in ensuring network reliability, redundancy, and scalability for ISPs and enterprises.
               </p>
             </CardContent>
           </Card>
