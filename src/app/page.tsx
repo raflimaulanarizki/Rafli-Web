@@ -179,24 +179,22 @@ export default function CrateCvPage() {
 
   return (
     <div className="min-h-screen bg-background font-body text-foreground">
-      <main className="container mx-auto max-w-6xl px-4 py-12 md:py-20">
-        <header className="mb-12 flex flex-col items-center md:flex-row md:items-start md:text-left gap-8">
-          <Avatar className="h-32 w-32 border-4 border-primary shadow-lg">
+      <main className="container mx-auto max-w-6xl px-4 py-8 md:py-16">
+        <header className="mb-12 flex flex-col items-center text-center md:flex-row md:items-start md:text-left gap-8">
+          <Avatar className="h-28 w-28 md:h-32 md:w-32 border-4 border-primary shadow-lg">
             <AvatarImage src="/photo.png" alt="Muhamad Rafli Maulana Rizki" />
             <AvatarFallback>MRMR</AvatarFallback>
           </Avatar>
-          <div className="flex-1 text-center md:text-left">
-            <h1 className="font-headline text-4xl md:text-6xl font-bold text-primary">
+          <div className="flex-1">
+            <h1 className="font-headline text-3xl md:text-5xl font-bold text-primary">
               Muhamad Rafli Maulana Rizki
             </h1>
-            <p className="mt-2 text-lg md:text-xl text-muted-foreground">
+            <p className="mt-2 text-base md:text-lg text-muted-foreground">
               Network Engineer | Network Administrator | Network Operations Center
             </p>
-            <div className="mt-4 flex justify-center md:justify-start items-center gap-4 text-sm text-muted-foreground">
+            <div className="mt-4 flex flex-col sm:flex-row sm:justify-center md:justify-start items-center gap-x-4 gap-y-2 text-sm text-muted-foreground">
               <a href="mailto:raflimaulanarizki8@gmail.com" className="flex items-center gap-2 hover:text-primary"><Mail className="h-4 w-4" /> raflimaulanarizki8@gmail.com</a>
-              <span className="text-muted-foreground/50">|</span>
               <a href="https://linkedin.com/in/raflimaulanarizki" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-primary"><Linkedin className="h-4 w-4" /> raflimaulanarizki</a>
-              <span className="text-muted-foreground/50">|</span>
               <a href="https://github.com/raflimaulana" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-primary"><Github className="h-4 w-4" /> raflimaulana</a>
             </div>
           </div>
@@ -206,10 +204,10 @@ export default function CrateCvPage() {
 
           <Card className="shadow-lg">
             <CardHeader>
-              <CardTitle className="font-headline text-3xl flex items-center gap-3"><Dna className="text-primary"/> Profile</CardTitle>
+              <CardTitle className="font-headline text-2xl md:text-3xl flex items-center gap-3"><Dna className="text-primary"/> Profile</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-base leading-relaxed">
+              <p className="text-sm md:text-base leading-relaxed">
                 My name is Rafli, I graduated from the network information systems and applications in 2023. I have a character who always wants to try new things, and always tries to work hard and is responsible for maximizing what I do. Able to work with a team or individually. very easy to socialize.
               </p>
             </CardContent>
@@ -223,7 +221,7 @@ export default function CrateCvPage() {
                 <CardContent>
                   {education.map((edu, index) => (
                     <div key={index} className={index < education.length - 1 ? "mb-3 border-b pb-3 border-border/50" : ""}>
-                      <p className="font-semibold">{edu.degree}</p>
+                      <p className="font-semibold text-sm md:text-base">{edu.degree}</p>
                       <p className="text-sm text-muted-foreground">{edu.institution}</p>
                       <p className="text-xs text-muted-foreground">{edu.period}</p>
                     </div>
@@ -238,7 +236,7 @@ export default function CrateCvPage() {
                     <div className="flex items-start gap-3">
                       <ChevronsRight className="h-4 w-4 text-primary mt-1 shrink-0"/>
                       <div>
-                          <p className="font-semibold">English</p>
+                          <p className="font-semibold text-sm md:text-base">English</p>
                           <p className="text-sm text-muted-foreground">Professional Working Proficiency</p>
                       </div>
                     </div>
@@ -248,27 +246,27 @@ export default function CrateCvPage() {
 
           <Card className="shadow-lg">
             <CardHeader>
-              <CardTitle className="font-headline text-3xl flex items-center gap-3"><Briefcase className="text-primary"/> Experience</CardTitle>
+              <CardTitle className="font-headline text-2xl md:text-3xl flex items-center gap-3"><Briefcase className="text-primary"/> Experience</CardTitle>
             </CardHeader>
             <CardContent>
               <Accordion type="single" collapsible className="w-full">
                 {experiences.map((exp, index) => (
                   <AccordionItem key={index} value={`item-${index}`}>
-                    <AccordionTrigger className="text-lg font-semibold hover:no-underline">
-                      <div className="flex flex-col md:flex-row md:items-center justify-between w-full text-left">
-                        <div className="flex-1">
-                          <p className="text-primary">{exp.role}</p>
+                    <AccordionTrigger className="hover:no-underline text-left">
+                      <div className="flex flex-col md:flex-row md:items-center justify-between w-full">
+                        <div className="flex-1 mb-2 md:mb-0">
+                          <p className="text-primary font-semibold text-base md:text-lg">{exp.role}</p>
                           <p className="text-sm font-normal text-muted-foreground flex items-center gap-2 mt-1">
                             <Building className="h-4 w-4" /> {exp.company}
                           </p>
                         </div>
-                        <div className="text-sm font-normal text-muted-foreground flex items-center gap-2 mt-2 md:mt-0">
+                        <div className="text-sm font-normal text-muted-foreground flex items-center gap-2">
                           <Calendar className="h-4 w-4" /> {exp.period}
                         </div>
                       </div>
                     </AccordionTrigger>
                     <AccordionContent>
-                      <ul className="list-disc space-y-2 pl-6 text-base mb-4">
+                      <ul className="list-disc space-y-2 pl-6 text-sm md:text-base mb-4">
                         {exp.description.map((item, itemIndex) => <li key={itemIndex}>{item}</li>)}
                       </ul>
                        <div className="flex flex-wrap gap-2">
@@ -283,13 +281,13 @@ export default function CrateCvPage() {
           
           <Card className="shadow-lg">
               <CardHeader>
-                <CardTitle className="font-headline text-3xl flex items-center gap-3"><ShieldCheck className="text-primary"/> Technical Skills</CardTitle>
+                <CardTitle className="font-headline text-2xl md:text-3xl flex items-center gap-3"><ShieldCheck className="text-primary"/> Technical Skills</CardTitle>
               </CardHeader>
               <CardContent>
                  <Accordion type="multiple" className="w-full grid grid-cols-1 md:grid-cols-2 gap-x-6">
                     {Object.entries(skillCategories).map(([category, skills], index) => (
                       <AccordionItem key={index} value={`skill-item-${index}`}>
-                        <AccordionTrigger className="text-lg font-semibold">{category}</AccordionTrigger>
+                        <AccordionTrigger className="text-base md:text-lg font-semibold text-left">{category}</AccordionTrigger>
                         <AccordionContent>
                             <p className="text-sm text-muted-foreground whitespace-pre-line">{skills}</p>
                         </AccordionContent>
@@ -303,7 +301,7 @@ export default function CrateCvPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <Card className="shadow-lg">
                   <CardHeader>
-                      <CardTitle className="font-headline text-3xl flex items-center gap-3"><Award className="text-primary" /> Achievements</CardTitle>
+                      <CardTitle className="font-headline text-2xl md:text-3xl flex items-center gap-3"><Award className="text-primary" /> Achievements</CardTitle>
                   </CardHeader>
                   <CardContent>
                       <ul className="space-y-3">
@@ -312,7 +310,7 @@ export default function CrateCvPage() {
                                 <Star className="h-5 w-5 text-primary mt-1 shrink-0"/>
                                 <div>
                                   <a href={ach.link} target="_blank" rel="noopener noreferrer" className="group font-semibold hover:text-primary hover:underline">
-                                    <p className="font-semibold">{ach.name}
+                                    <p className="font-semibold text-sm md:text-base">{ach.name}
                                       <ExternalLink className="inline-block h-3 w-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity"/>
                                     </p>
                                   </a>
@@ -325,7 +323,7 @@ export default function CrateCvPage() {
               </Card>
               <Card className="shadow-lg">
                   <CardHeader>
-                      <CardTitle className="font-headline text-3xl flex items-center gap-3"><CheckCircle className="text-primary" /> Certifications</CardTitle>
+                      <CardTitle className="font-headline text-2xl md:text-3xl flex items-center gap-3"><CheckCircle className="text-primary" /> Certifications</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <ul className="space-y-3">
@@ -334,7 +332,7 @@ export default function CrateCvPage() {
                               <ChevronsRight className="h-4 w-4 text-primary mt-1 shrink-0"/>
                               <div>
                                   <a href={cert.link} target="_blank" rel="noopener noreferrer" className="group font-semibold hover:text-primary hover:underline">
-                                      {cert.name}
+                                      <span className="text-sm md:text-base">{cert.name}</span>
                                       <ExternalLink className="inline-block h-3 w-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity"/>
                                   </a>
                                   <p className="text-sm text-muted-foreground">{cert.issuer}</p>
@@ -348,11 +346,11 @@ export default function CrateCvPage() {
           
           <Card className="shadow-lg">
             <CardHeader>
-              <CardTitle className="font-headline text-3xl">Badges</CardTitle>
+              <CardTitle className="font-headline text-2xl md:text-3xl">Badges</CardTitle>
             </CardHeader>
-            <CardContent className="flex flex-wrap gap-4 items-center">
+            <CardContent className="flex flex-col sm:flex-row flex-wrap gap-4 items-center">
               <a href="https://holopin.io/@raflimaulanarizki" target="_blank" rel="noopener noreferrer">
-                <img src="https://holopin.me/raflimaulanarizki" alt="An image of @raflimaulanarizki's Holopin badges, which is a link to view their full Holopin profile" />
+                <img src="https://holopin.me/raflimaulanarizki" alt="An image of @raflimaulanarizki's Holopin badges, which is a link to view their full Holopin profile" className="w-full max-w-xs sm:max-w-sm md:max-w-md"/>
               </a>
               <a href="https://ipv6.he.net/certification/" target="_blank" rel="noopener noreferrer">
                 <img src="https://ipv6.he.net/certification/create_badge.php?pass_name=raflimaulanarizki&badge=2" alt="IPv6 Certification Badge" />
