@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Award, Briefcase, Building, Calendar, CheckCircle, ChevronsRight, Dna, GraduationCap, Github, Languages, Linkedin, Mail, Server, Smartphone, Link as LinkIcon, ExternalLink, Router, Network, ShieldCheck, Star } from "lucide-react";
+import { Award, Briefcase, Building, Calendar, CheckCircle, ChevronsRight, Dna, GraduationCap, Github, Languages, Linkedin, Mail, Server, Smartphone, Link as LinkIcon, ExternalLink, Router, Network, ShieldCheck, Star, FolderKanban } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
@@ -134,6 +134,21 @@ const education = [
     }
 ];
 
+const projects = [
+    {
+        name: "Personal CV Website",
+        description: "This very website, built with Next.js and ShadCN UI.",
+        link: "#",
+        tech: ["Next.js", "React", "Tailwind CSS"]
+    },
+    {
+        name: "Home Lab Network Setup",
+        description: "Configured a multi-segment home network with Proxmox for virtualization.",
+        link: "#",
+        tech: ["Proxmox", "Mikrotik", "Docker"]
+    },
+];
+
 const certifications = [
   { name: "Cisco Certified Network Associate (CCNA)", issuer: "Cisco", link: "#" },
   { name: "Mikrotik Certified Network Associate (MTCNA)", issuer: "Mikrotik", link: "#" },
@@ -201,8 +216,8 @@ export default function CrateCvPage() {
         </header>
 
         <div className="space-y-12">
-
-          <Card className="shadow-lg">
+          
+          <Card id="profile" className="shadow-lg">
             <CardHeader>
               <CardTitle className="font-headline text-2xl md:text-3xl flex items-center gap-3"><Dna className="text-primary"/> Profile</CardTitle>
             </CardHeader>
@@ -230,16 +245,26 @@ export default function CrateCvPage() {
             </Card>
             <Card className="shadow-lg">
                 <CardHeader className="pb-2">
-                    <CardTitle className="font-headline text-xl flex items-center gap-2"><Languages className="text-primary h-5 w-5"/> Languages</CardTitle>
+                    <CardTitle className="font-headline text-xl flex items-center gap-2"><FolderKanban className="text-primary h-5 w-5"/> Projects / Portfolios</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <div className="flex items-start gap-3">
-                      <ChevronsRight className="h-4 w-4 text-primary mt-1 shrink-0"/>
-                      <div>
-                          <p className="font-semibold text-sm md:text-base">English</p>
-                          <p className="text-sm text-muted-foreground">Professional Working Proficiency</p>
-                      </div>
-                    </div>
+                  <ul className="space-y-3">
+                    {projects.map((proj, index) => (
+                      <li key={index} className="flex items-start gap-3">
+                        <ChevronsRight className="h-4 w-4 text-primary mt-1 shrink-0"/>
+                        <div>
+                          <a href={proj.link} target="_blank" rel="noopener noreferrer" className="group font-semibold hover:text-primary hover:underline">
+                            <span className="text-sm md:text-base">{proj.name}</span>
+                            <ExternalLink className="inline-block h-3 w-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity"/>
+                          </a>
+                          <p className="text-sm text-muted-foreground">{proj.description}</p>
+                           <div className="flex flex-wrap gap-2 mt-2">
+                              {proj.tech.map(t => <Badge key={t} variant="secondary">{t}</Badge>)}
+                          </div>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
                 </CardContent>
             </Card>
           </div>
@@ -364,6 +389,11 @@ export default function CrateCvPage() {
         <div className="container mx-auto flex flex-col items-center justify-between gap-4 text-center md:flex-row">
           <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} Muhamad Rafli Maulana Rizki. All Rights Reserved.</p>
           <div className="flex items-center gap-4">
+            <Link href="#profile" className="text-sm text-muted-foreground transition-colors hover:text-primary">Profile</Link>
+            <Link href="#experience" className="text-sm text-muted-foreground transition-colors hover:text-primary">Experience</Link>
+            <Link href="#skills" className="text-sm text-muted-foreground transition-colors hover:text-primary">Skills</Link>
+          </div>
+          <div className="flex items-center gap-4">
             <Link href="https://www.linkedin.com/in/raflimaulanarizki" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
               <Linkedin className="h-6 w-6 text-muted-foreground transition-colors hover:text-primary" />
             </Link>
@@ -379,3 +409,5 @@ export default function CrateCvPage() {
     </div>
   );
 }
+
+    
