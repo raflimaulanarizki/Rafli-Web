@@ -373,7 +373,7 @@ export default function CrateCvPage() {
             <CardHeader>
               <CardTitle className="font-headline text-2xl md:text-3xl">Badges</CardTitle>
             </CardHeader>
-            <CardContent className="flex flex-col sm:flex-row flex-wrap gap-4 items-center">
+            <CardContent className="flex flex-col sm:flex-row flex-wrap gap-4 items-center justify-center">
               <a href="https://holopin.io/@raflimaulanarizki" target="_blank" rel="noopener noreferrer">
                 <img src="https://holopin.me/raflimaulanarizki" alt="An image of @raflimaulanarizki's Holopin badges, which is a link to view their full Holopin profile" className="w-full max-w-xs sm:max-w-sm md:max-w-md"/>
               </a>
@@ -409,5 +409,3 @@ export default function CrateCvPage() {
     </div>
   );
 }
-
-    
