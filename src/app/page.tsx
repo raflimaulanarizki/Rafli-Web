@@ -182,7 +182,7 @@ export default function CrateCvPage() {
       <main className="container mx-auto max-w-6xl px-4 py-12 md:py-20">
         <header className="mb-12 flex flex-col items-center md:flex-row md:items-start md:text-left gap-8">
           <Avatar className="h-32 w-32 border-4 border-primary shadow-lg">
-            <AvatarImage src="/photo.jpg" alt="Muhamad Rafli Maulana Rizki" />
+            <AvatarImage src="https://placehold.co/256x256.png" alt="Muhamad Rafli Maulana Rizki" />
             <AvatarFallback>MRMR</AvatarFallback>
           </Avatar>
           <div className="flex-1 text-center md:text-left">
@@ -379,3 +379,5 @@ export default function CrateCvPage() {
     </div>
   );
 }
+
+    
