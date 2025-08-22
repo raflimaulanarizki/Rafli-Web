@@ -389,11 +389,6 @@ export default function CrateCvPage() {
         <div className="container mx-auto flex flex-col items-center justify-between gap-4 text-center md:flex-row">
           <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} Muhamad Rafli Maulana Rizki. All Rights Reserved.</p>
           <div className="flex items-center gap-4">
-            <Link href="#profile" className="text-sm text-muted-foreground transition-colors hover:text-primary">Profile</Link>
-            <Link href="#experience" className="text-sm text-muted-foreground transition-colors hover:text-primary">Experience</Link>
-            <Link href="#skills" className="text-sm text-muted-foreground transition-colors hover:text-primary">Skills</Link>
-          </div>
-          <div className="flex items-center gap-4">
             <Link href="https://www.linkedin.com/in/raflimaulanarizki" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
               <Linkedin className="h-6 w-6 text-muted-foreground transition-colors hover:text-primary" />
             </Link>
