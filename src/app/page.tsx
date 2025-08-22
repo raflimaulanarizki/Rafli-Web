@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Award, Briefcase, Building, Calendar, CheckCircle, ChevronsRight, Dna, GraduationCap, Github, Languages, Linkedin, Mail, Server, Smartphone, Link as LinkIcon, ExternalLink, Router, Network, ShieldCheck, Star, FolderKanban } from "lucide-react";
+import { Award, Briefcase, Building, Calendar, CheckCircle, ChevronsRight, Dna, GraduationCap, Github, Languages, Linkedin, Mail, Server, Smartphone, Link as LinkIcon, ExternalLink, Router, Network, ShieldCheck, Star, FolderKanban, Medal } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
@@ -371,7 +371,7 @@ export default function CrateCvPage() {
           
           <Card className="shadow-lg">
             <CardHeader>
-              <CardTitle className="font-headline text-2xl md:text-3xl">Badges</CardTitle>
+              <CardTitle className="font-headline text-2xl md:text-3xl flex items-center gap-3"><Medal className="text-primary"/> Badges</CardTitle>
             </CardHeader>
             <CardContent className="flex flex-col sm:flex-row flex-wrap gap-4 items-center justify-center">
               <a href="https://holopin.io/@raflimaulanarizki" target="_blank" rel="noopener noreferrer">
