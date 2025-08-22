@@ -182,7 +182,7 @@ export default function CrateCvPage() {
       <main className="container mx-auto max-w-6xl px-4 py-12 md:py-20">
         <header className="mb-12 flex flex-col items-center md:flex-row md:items-start md:text-left gap-8">
           <Avatar className="h-32 w-32 border-4 border-primary shadow-lg">
-            <AvatarImage src="https://placehold.co/256x256.png" alt="Muhamad Rafli Maulana Rizki" />
+            <AvatarImage src="/photo.png" alt="Muhamad Rafli Maulana Rizki" />
             <AvatarFallback>MRMR</AvatarFallback>
           </Avatar>
           <div className="flex-1 text-center md:text-left">
@@ -204,34 +204,46 @@ export default function CrateCvPage() {
 
         <div className="space-y-12">
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="md:col-span-2 shadow-lg">
-              <CardHeader>
-                <CardTitle className="font-headline text-3xl flex items-center gap-3"><Dna className="text-primary"/> Profile</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-base leading-relaxed">
-                  My name is Rafli, I graduated from the network information systems and applications in 2023. I have a character who always wants to try new things, and always tries to work hard and is responsible for maximizing what I do. Able to work with a team or individually. very easy to socialize.
-                </p>
-              </CardContent>
+          <Card className="shadow-lg">
+            <CardHeader>
+              <CardTitle className="font-headline text-3xl flex items-center gap-3"><Dna className="text-primary"/> Profile</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-base leading-relaxed">
+                My name is Rafli, I graduated from the network information systems and applications in 2023. I have a character who always wants to try new things, and always tries to work hard and is responsible for maximizing what I do. Able to work with a team or individually. very easy to socialize.
+              </p>
+            </CardContent>
+          </Card>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <Card className="shadow-lg">
+                <CardHeader className="pb-2">
+                  <CardTitle className="font-headline text-xl flex items-center gap-2"><GraduationCap className="text-primary h-5 w-5"/> Education</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  {education.map((edu, index) => (
+                    <div key={index} className={index < education.length - 1 ? "mb-3 border-b pb-3 border-border/50" : ""}>
+                      <p className="font-semibold">{edu.degree}</p>
+                      <p className="text-sm text-muted-foreground">{edu.institution}</p>
+                      <p className="text-xs text-muted-foreground">{edu.period}</p>
+                    </div>
+                  ))}
+                </CardContent>
             </Card>
-
-            <div className="space-y-4">
-              <Card className="shadow-lg">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="font-headline text-xl flex items-center gap-2"><GraduationCap className="text-primary h-5 w-5"/> Education</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    {education.map((edu, index) => (
-                      <div key={index} className={index < education.length - 1 ? "mb-3 border-b pb-3 border-border/50" : ""}>
-                        <p className="font-semibold">{edu.degree}</p>
-                        <p className="text-sm text-muted-foreground">{edu.institution}</p>
-                        <p className="text-xs text-muted-foreground">{edu.period}</p>
+            <Card className="shadow-lg">
+                <CardHeader className="pb-2">
+                    <CardTitle className="font-headline text-xl flex items-center gap-2"><Languages className="text-primary h-5 w-5"/> Languages</CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <div className="flex items-start gap-3">
+                      <ChevronsRight className="h-4 w-4 text-primary mt-1 shrink-0"/>
+                      <div>
+                          <p className="font-semibold">English</p>
+                          <p className="text-sm text-muted-foreground">Professional Working Proficiency</p>
                       </div>
-                    ))}
-                  </CardContent>
-              </Card>
-            </div>
+                    </div>
+                </CardContent>
+            </Card>
           </div>
 
           <Card className="shadow-lg">
@@ -309,16 +321,6 @@ export default function CrateCvPage() {
                               </li>
                           ))}
                       </ul>
-                       <div className="mt-4 pt-4 border-t">
-                          <h4 className="font-headline text-xl flex items-center gap-2 mb-3"><Languages className="text-primary h-5 w-5"/> Languages</h4>
-                           <div className="flex items-start gap-3">
-                            <ChevronsRight className="h-4 w-4 text-primary mt-1 shrink-0"/>
-                            <div>
-                                <p className="font-semibold">English</p>
-                                <p className="text-sm text-muted-foreground">Professional Working Proficiency</p>
-                            </div>
-                          </div>
-                      </div>
                   </CardContent>
               </Card>
               <Card className="shadow-lg">
@@ -379,5 +381,3 @@ export default function CrateCvPage() {
     </div>
   );
 }
-
-    
