@@ -50,7 +50,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
     }
 
     return (
-        <main className="container mx-auto max-w-5xl px-4 py-8 md:py-12">
+        <main className="container mx-auto max-w-6xl px-4 py-8 md:py-12">
             <Card>
                 <CardContent className="p-6 md:p-8">
                     <article className="prose dark:prose-invert max-w-none">
@@ -112,4 +112,3 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
         </main>
     );
 }
-
