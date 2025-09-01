@@ -4,13 +4,14 @@ import matter from 'gray-matter';
 import { remark } from 'remark';
 import { visit } from 'unist-util-visit';
 import { slug } from 'github-slugger';
+import html from 'remark-html';
 
 const postsDirectory = path.join(process.cwd(), '_posts');
 
 export interface PostData {
     id: string;
     [key: string]: any;
-    content: string;
+    contentHtml: string;
     toc: TocEntry[];
     readTime: string;
 }
@@ -96,14 +97,19 @@ export async function getPostData(slugId: string): Promise<PostData> {
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const matterResult = matter(fileContents);
 
+  const processedContent = await remark()
+    .use(html)
+    .process(matterResult.content);
+  const contentHtml = processedContent.toString();
+
   const readTime = calculateReadTime(matterResult.content);
   const toc = generateToc(matterResult.content);
 
   return {
     id: slugId,
-    content: matterResult.content,
+    contentHtml,
     readTime,
-    toc,
+toc,
     ...matterResult.data,
   };
 }

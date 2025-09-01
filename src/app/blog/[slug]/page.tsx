@@ -7,12 +7,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
 import React, { createElement, Fragment } from "react";
 import { notFound } from 'next/navigation';
-import { unified } from 'unified';
-import remarkParse from 'remark-parse';
-import remarkRehype from 'remark-rehype';
-import rehypeReact from 'rehype-react';
-import { CodeBlock } from '@/components/ui/code-block';
-
 
 export async function generateStaticParams() {
   const paths = getAllPostIds();
@@ -41,18 +35,6 @@ const renderToc = (items: TocEntry[]) => {
     return createList(items, 2);
 }
 
-const contentProcessor = unified()
-    .use(remarkParse)
-    .use(remarkRehype)
-    .use(rehypeReact, {
-        createElement,
-        Fragment,
-        components: {
-           pre: CodeBlock,
-        },
-    });
-
-
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {
     let post;
     try {
@@ -64,9 +46,6 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
     if (!post) {
         notFound();
     }
-
-    const content = contentProcessor.processSync(post.content).result;
-
 
     return (
         <main className="container mx-auto max-w-4xl px-4 py-8 md:py-12">
@@ -118,7 +97,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                     </Card>
                 )}
 
-                <div>{content}</div>
+                <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} />
             </article>
         </main>
     );
