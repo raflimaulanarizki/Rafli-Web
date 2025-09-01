@@ -180,7 +180,7 @@ const skillCategories = {
   "Others": "Vyos, FRR, IPv6, Ruijie, Ubiquiti, Perle, FTTX, OLT, TP-Link"
 };
 
-function CrateCvPageClient() {
+export default function CrateCvPageClient() {
     const { toast } = useToast();
     const form = useForm<z.infer<typeof contactFormSchema>>({
         resolver: zodResolver(contactFormSchema),
@@ -456,12 +456,4 @@ function CrateCvPageClient() {
     );
 }
 
-export default function CrateCvPage() {
-    const [isClient, setIsClient] = React.useState(false);
-
-    React.useEffect(() => {
-        setIsClient(true);
-    }, []);
-
-    return isClient ? <CrateCvPageClient /> : null;
-}
+    
