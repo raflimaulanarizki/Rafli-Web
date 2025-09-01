@@ -111,53 +111,8 @@ export default function BlogSearchComponent({ initialPosts }: { initialPosts: an
           </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Main Content */}
-            <div className="lg:col-span-2 space-y-8">
-              {filteredPosts.length > 0 ? filteredPosts.map((post, index) => (
-                <Card key={index} className="flex flex-col overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                   <Link href={`/blog/${post.id}`} className="block">
-                      <Image
-                        src={post.image}
-                        alt={post.title}
-                        width={800}
-                        height={400}
-                        data-ai-hint={post.dataAiHint}
-                        className="w-full h-auto object-cover"
-                      />
-                  </Link>
-                  <CardContent className="p-6">
-                    <h2 className="font-headline text-2xl font-bold mb-2">
-                       <Link href={`/blog/${post.id}`} className="hover:text-primary hover:underline">
-                        {highlightText(post.title, searchQuery)}
-                      </Link>
-                    </h2>
-                    <p className="text-muted-foreground mb-4">{highlightText(post.description, searchQuery)}</p>
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {post.tags.map((tag: string) => (
-                         <Link key={tag} href={createFilterURL('tag', tag)} passHref>
-                          <Badge 
-                            variant={tagQuery?.toLowerCase() === tag.toLowerCase() ? "default" : "secondary"}
-                            className="cursor-pointer"
-                          >
-                            # {tag}
-                          </Badge>
-                        </Link>
-                      ))}
-                    </div>
-                    <div className="text-xs text-muted-foreground flex flex-wrap items-center gap-x-4 gap-y-1">
-                      <span>{post.date}</span>
-                      <span>{post.readTime}</span>
-                      <span>{post.author}</span>
-                    </div>
-                  </CardContent>
-                </Card>
-              )) : (
-                <p>No posts found for your search.</p>
-              )}
-            </div>
-
             {/* Sidebar */}
-            <aside className="lg:col-span-1 space-y-8">
+            <aside className="lg:col-span-1 space-y-8 lg:order-2">
                 <div className="relative">
                     <Input placeholder="Search..." className="pr-10" onKeyDown={handleSearch} defaultValue={searchQuery}/>
                     <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
@@ -203,6 +158,51 @@ export default function BlogSearchComponent({ initialPosts }: { initialPosts: an
                   </Card>
                 )}
             </aside>
+            
+            {/* Main Content */}
+            <div className="lg:col-span-2 space-y-8 lg:order-1">
+              {filteredPosts.length > 0 ? filteredPosts.map((post, index) => (
+                <Card key={index} className="flex flex-col overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+                   <Link href={`/blog/${post.id}`} className="block">
+                      <Image
+                        src={post.image}
+                        alt={post.title}
+                        width={800}
+                        height={400}
+                        data-ai-hint={post.dataAiHint}
+                        className="w-full h-auto object-cover"
+                      />
+                  </Link>
+                  <CardContent className="p-6">
+                    <h2 className="font-headline text-2xl font-bold mb-2">
+                       <Link href={`/blog/${post.id}`} className="hover:text-primary hover:underline">
+                        {highlightText(post.title, searchQuery)}
+                      </Link>
+                    </h2>
+                    <p className="text-muted-foreground mb-4">{highlightText(post.description, searchQuery)}</p>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {post.tags.map((tag: string) => (
+                         <Link key={tag} href={createFilterURL('tag', tag)} passHref>
+                          <Badge 
+                            variant={tagQuery?.toLowerCase() === tag.toLowerCase() ? "default" : "secondary"}
+                            className="cursor-pointer"
+                          >
+                            # {tag}
+                          </Badge>
+                        </Link>
+                      ))}
+                    </div>
+                    <div className="text-xs text-muted-foreground flex flex-wrap items-center gap-x-4 gap-y-1">
+                      <span>{post.date}</span>
+                      <span>{post.readTime}</span>
+                      <span>{post.author}</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              )) : (
+                <p>No posts found for your search.</p>
+              )}
+            </div>
         </div>
       </main>
 
