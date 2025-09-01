@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import React, { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from 'next/navigation';
+import { cn } from "@/lib/utils";
 
 const blogPosts = [
   {
@@ -69,36 +70,65 @@ const blogPosts = [
   }
 ];
 
-const categories = ["System", "Pemrograman", "Syntax", "Themes", "VPN", "A Category with Slug"];
-const allTags = ["Network", "Mikrotik", "Cisco", "Juniper", "Markdown", "Proxmox", "VRF", "Css", "CustomTag", "EIGRP", "Docker", "Homelab", "pfSense", "Security", "Firewall"];
+const categories = ["System", "Pemrograman", "Syntax", "Themes", "VPN", "A Category with Slug", "Cisco", "Proxmox", "pfSense"];
+const allTags = ["Network", "Mikrotik", "Cisco", "Juniper", "Markdown", "Proxmox", "VRF", "Css", "CustomTag", "EIGRP", "Docker", "Homelab", "pfSense", "Security", "Firewall", "System"];
 
 
 function BlogSearchComponent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const searchQuery = searchParams.get('q') || '';
+  const categoryQuery = searchParams.get('category');
+  const tagQuery = searchParams.get('tag');
+
   const [filteredPosts, setFilteredPosts] = useState(blogPosts);
 
   useEffect(() => {
+    let results = blogPosts;
+
     if (searchQuery) {
       const lowercasedQuery = searchQuery.toLowerCase();
-      const results = blogPosts.filter(post =>
+      results = results.filter(post =>
         post.title.toLowerCase().includes(lowercasedQuery) ||
         post.description.toLowerCase().includes(lowercasedQuery) ||
         post.tags.some(tag => tag.toLowerCase().includes(lowercasedQuery))
       );
-      setFilteredPosts(results);
-    } else {
-      setFilteredPosts(blogPosts);
     }
-  }, [searchQuery]);
+
+    if(categoryQuery) {
+      results = results.filter(post => post.tags.map(t => t.toLowerCase()).includes(categoryQuery.toLowerCase()));
+    }
+    
+    if(tagQuery) {
+      results = results.filter(post => post.tags.map(t => t.toLowerCase()).includes(tagQuery.toLowerCase()));
+    }
+
+
+    setFilteredPosts(results);
+  }, [searchQuery, categoryQuery, tagQuery]);
 
   const handleSearch = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       const query = event.currentTarget.value;
-      router.push(`/blog?q=${query}`);
+      router.push(query ? `/blog?q=${query}` : '/blog');
     }
   };
+  
+  const createFilterURL = (type: 'category' | 'tag', value: string) => {
+    const params = new URLSearchParams();
+    const lowercasedValue = value.toLowerCase();
+
+    if (type === 'category' && categoryQuery?.toLowerCase() === lowercasedValue) {
+      return '/blog';
+    }
+    if (type === 'tag' && tagQuery?.toLowerCase() === lowercasedValue) {
+      return '/blog';
+    }
+    
+    params.set(type, value);
+    return `/blog?${params.toString()}`;
+  }
+
 
   const highlightText = (text: string, highlight: string) => {
     if (!highlight.trim()) {
@@ -155,7 +185,16 @@ function BlogSearchComponent() {
                     </h2>
                     <p className="text-muted-foreground mb-4">{highlightText(post.description, searchQuery)}</p>
                     <div className="flex flex-wrap gap-2 mb-4">
-                      {post.tags.map(tag => <Badge key={tag} variant="secondary"># {tag}</Badge>)}
+                      {post.tags.map(tag => (
+                         <Link key={tag} href={createFilterURL('tag', tag)} passHref>
+                          <Badge 
+                            variant={tagQuery?.toLowerCase() === tag.toLowerCase() ? "default" : "secondary"}
+                            className="cursor-pointer"
+                          >
+                            # {tag}
+                          </Badge>
+                        </Link>
+                      ))}
                     </div>
                     <div className="text-xs text-muted-foreground flex flex-wrap items-center gap-x-4 gap-y-1">
                       <span>{post.date}</span>
@@ -180,7 +219,16 @@ function BlogSearchComponent() {
                     <CardContent className="p-6">
                         <h3 className="font-headline text-lg font-semibold mb-4 flex items-center gap-2"><Grid className="h-5 w-5 text-primary"/>Categories</h3>
                         <div className="flex flex-wrap gap-2">
-                            {categories.map(cat => <Badge key={cat} variant="outline">{cat}</Badge>)}
+                            {categories.map(cat => (
+                               <Link key={cat} href={createFilterURL('category', cat)} passHref>
+                                <Badge 
+                                  variant={categoryQuery?.toLowerCase() === cat.toLowerCase() ? "default" : "outline"}
+                                  className="cursor-pointer"
+                                >
+                                  {cat}
+                                </Badge>
+                              </Link>
+                            ))}
                         </div>
                     </CardContent>
                 </Card>
@@ -189,7 +237,16 @@ function BlogSearchComponent() {
                     <CardContent className="p-6">
                         <h3 className="font-headline text-lg font-semibold mb-4 flex items-center gap-2"><Tag className="h-5 w-5 text-primary"/>Tags</h3>
                         <div className="flex flex-wrap gap-2">
-                            {allTags.map(tag => <Badge key={tag} variant="outline">{tag}</Badge>)}
+                            {allTags.map(tag => (
+                               <Link key={tag} href={createFilterURL('tag', tag)} passHref>
+                                <Badge 
+                                  variant={tagQuery?.toLowerCase() === tag.toLowerCase() ? "default" : "outline"}
+                                  className="cursor-pointer"
+                                >
+                                  {tag}
+                                </Badge>
+                              </Link>
+                            ))}
                         </div>
                     </CardContent>
                 </Card>
@@ -214,3 +271,5 @@ export default function BlogPage() {
         </Suspense>
     )
 }
+
+    
