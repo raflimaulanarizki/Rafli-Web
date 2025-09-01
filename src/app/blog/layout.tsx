@@ -3,7 +3,8 @@
 
 import { Moon, Sun, Search, Menu, Rss, Home } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
 
@@ -31,25 +32,41 @@ export default function BlogLayout({
               <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
               <span className="sr-only">Toggle theme</span>
             </Button>
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <Menu className="h-5 w-5" />
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" className="rounded-full">
+                   <Avatar className="h-8 w-8">
+                     <AvatarImage src="/photo.png" alt="Muhamad Rafli Maulana Rizki" />
+                     <AvatarFallback>MRMR</AvatarFallback>
+                   </Avatar>
                 </Button>
-              </SheetTrigger>
-              <SheetContent>
-                <nav className="flex flex-col gap-4 mt-8">
-                  <Link href="/" className="flex items-center gap-2 text-lg font-medium hover:text-primary">
-                    <Home className="h-5 w-5" />
-                    Home
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56" align="end">
+                <DropdownMenuLabel>
+                  <div className="flex flex-col space-y-1">
+                    <p className="text-sm font-medium leading-none">Muhamad Rafli Maulana Rizki</p>
+                    <p className="text-xs leading-none text-muted-foreground">
+                      raflimaulanarizki8@gmail.com
+                    </p>
+                  </div>
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuGroup>
+                  <Link href="/">
+                    <DropdownMenuItem>
+                      <Home className="mr-2 h-4 w-4" />
+                      <span>Home</span>
+                    </DropdownMenuItem>
                   </Link>
-                   <Link href="/blog" className="flex items-center gap-2 text-lg font-medium hover:text-primary">
-                    <Rss className="h-5 w-5" />
-                    Blog
+                   <Link href="/blog">
+                    <DropdownMenuItem>
+                      <Rss className="mr-2 h-4 w-4" />
+                      <span>Blog</span>
+                    </DropdownMenuItem>
                   </Link>
-                </nav>
-              </SheetContent>
-            </Sheet>
+                </DropdownMenuGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </header>
