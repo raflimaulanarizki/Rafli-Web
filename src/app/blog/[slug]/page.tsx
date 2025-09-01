@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Calendar, Clock, User } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
-import React, { createElement, Fragment } from "react";
+import React from "react";
 import { notFound } from 'next/navigation';
 import { CodeBlockWrapper } from '@/components/ui/code-block';
 
@@ -37,9 +37,10 @@ const renderToc = (items: TocEntry[]) => {
 }
 
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {
+    const slug = params.slug;
     let post;
     try {
-        post = await getPostData(params.slug);
+        post = await getPostData(slug);
     } catch (error) {
         notFound();
     }
