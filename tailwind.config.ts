@@ -1,3 +1,4 @@
+
 import type {Config} from 'tailwindcss';
 
 export default {
@@ -11,8 +12,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        body: ['Inter', 'sans-serif'],
-        headline: ['Literata', 'serif'],
+        body: ['var(--font-inter)', 'sans-serif'],
+        headline: ['var(--font-literata)', 'serif'],
         code: ['monospace'],
       },
       colors: {
@@ -109,7 +110,7 @@ export default {
             '--tw-prose-quote-borders': theme('colors.primary'),
             '--tw-prose-captions': theme('colors.muted-foreground'),
             '--tw-prose-code': theme('colors.foreground'),
-            '--tw-prose-pre-code': 'hsl(var(--foreground))',
+            '--tw-prose-pre-code': 'hsl(220, 10%, 20%)',
             '--tw-prose-pre-bg': '#F0EFEA',
             '--tw-prose-th-borders': theme('colors.border'),
             '--tw-prose-td-borders': theme('colors.border'),
