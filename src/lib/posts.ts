@@ -5,6 +5,9 @@ import { remark } from 'remark';
 import { visit } from 'unist-util-visit';
 import { slug } from 'github-slugger';
 import html from 'remark-html';
+import remarkSlug from 'remark-slug';
+import remarkAutolinkHeadings from 'remark-autolink-headings';
+
 
 const postsDirectory = path.join(process.cwd(), '_posts');
 
@@ -101,6 +104,8 @@ export async function getPostData(slugId: string): Promise<PostData> {
   const matterResult = matter(fileContents);
 
   const processedContent = await remark()
+    .use(remarkSlug)
+    .use(remarkAutolinkHeadings)
     .use(html, { sanitize: false })
     .process(matterResult.content);
   const contentHtml = processedContent.toString();
