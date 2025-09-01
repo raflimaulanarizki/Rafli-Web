@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -24,7 +25,7 @@ export default function RootLayout({
       <body className="font-body antialiased">
         <ThemeProvider
             attribute="class"
-            defaultTheme="dark"
+            defaultTheme="light"
             enableSystem
             disableTransitionOnChange
         >
