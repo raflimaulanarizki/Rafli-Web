@@ -97,7 +97,7 @@ export default {
       typography: ({ theme }: { theme: any }) => ({
         DEFAULT: {
           css: {
-            'h2, h3, h4': {
+            'h1, h2, h3, h4, h5, h6': {
               'scroll-margin-top': theme('spacing.20'),
             },
             'pre': {

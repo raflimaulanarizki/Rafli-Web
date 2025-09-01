@@ -9,7 +9,6 @@ import React, { createElement, Fragment } from "react";
 import { notFound } from 'next/navigation';
 import { unified } from 'unified';
 import rehypeParse from 'rehype-parse';
-import { visit } from 'unist-util-visit';
 import rehypeReact from 'rehype-react';
 import { CodeBlock } from '@/components/ui/code-block';
 
@@ -41,18 +40,6 @@ const renderToc = (items: TocEntry[]) => {
     return createList(items, 2);
 }
 
-// Function to add scroll-mt-20 to section headers
-const addScrollMarginToHeadings = (html: string) => {
-    const tree = unified().use(rehypeParse, { fragment: true }).parse(html);
-    visit(tree, 'element', (node: any) => {
-        if (node.tagName[0] === 'h' && node.properties && node.properties.id) {
-            node.properties.className = (node.properties.className || []).concat('scroll-mt-20');
-        }
-    });
-    return unified().stringify(tree);
-};
-
-
 const contentProcessor = unified()
     .use(rehypeParse, { fragment: true })
     .use(rehypeReact, {
@@ -76,8 +63,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
         notFound();
     }
 
-    const htmlWithScrollMargin = addScrollMarginToHeadings(post.contentHtml);
-    const content = contentProcessor.processSync(htmlWithScrollMargin).result;
+    const content = contentProcessor.processSync(post.contentHtml).result;
 
 
     return (
