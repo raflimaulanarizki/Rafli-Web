@@ -22,6 +22,18 @@ const nextConfig: NextConfig = {
         hostname: 'picsum.photos',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'holopin.me',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'ipv6.he.net',
+        port: '',
+        pathname: '/**',
       }
     ],
     formats: ['image/avif', 'image/webp'],
@@ -34,3 +46,5 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+
+    

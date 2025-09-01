@@ -109,7 +109,7 @@ export default {
             '--tw-prose-quotes': theme('colors.foreground'),
             '--tw-prose-quote-borders': theme('colors.primary'),
             '--tw-prose-captions': theme('colors.muted-foreground'),
-            '--tw-prose-code': theme('colors.foreground'),
+            '--tw-prose-code': 'hsl(220, 10%, 20%)',
             '--tw-prose-pre-code': 'hsl(220, 10%, 20%)',
             '--tw-prose-pre-bg': '#F0EFEA',
             '--tw-prose-th-borders': theme('colors.border'),
@@ -125,9 +125,9 @@ export default {
             '--tw-prose-invert-quotes': theme('colors.foreground'),
             '--tw-prose-invert-quote-borders': theme('colors.primary'),
             '--tw-prose-invert-captions': theme('colors.muted-foreground'),
-            '--tw-prose-invert-code': theme('colors.foreground'),
+            '--tw-prose-invert-code': 'hsl(var(--foreground))',
             '--tw-prose-invert-pre-code': 'hsl(var(--foreground))',
-            '--tw-prose-invert-pre-bg': 'hsl(var(--background))',
+            '--tw-prose-invert-pre-bg': 'hsl(222.2, 47.4%, 18.2%)',
             '--tw-prose-invert-th-borders': theme('colors.border'),
             '--tw-prose-invert-td-borders': theme('colors.border'),
 
@@ -168,3 +168,5 @@ export default {
   },
   plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')],
 } satisfies Config;
+
+    

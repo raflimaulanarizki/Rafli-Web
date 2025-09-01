@@ -1,12 +1,9 @@
 
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Award, Briefcase, Building, Calendar, CheckCircle, ChevronsRight, Dna, GraduationCap, Github, Languages, Linkedin, Mail, Server, Smartphone, Link as LinkIcon, ExternalLink, Router, Network, ShieldCheck, Star, FolderKanban, Medal, Rss, Menu, Moon, Sun, Home } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
@@ -14,20 +11,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/hooks/use-toast";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import { useTheme } from "next-themes";
-import React from "react";
+import React, { Suspense } from "react";
 
-const contactFormSchema = z.object({
-  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
-  email: z.string().email({ message: "Please enter a valid email address." }),
-  message: z.string().min(10, { message: "Message must be at least 10 characters." }),
-});
+const ContactForm = React.lazy(() => import('@/components/ContactForm'));
 
 const experiences = [
     {
@@ -181,25 +169,12 @@ const skillCategories = {
 };
 
 export default function CrateCvPageClient() {
-    const { toast } = useToast();
-    const form = useForm<z.infer<typeof contactFormSchema>>({
-        resolver: zodResolver(contactFormSchema),
-        defaultValues: { name: "", email: "", message: "" },
-    });
     const { setTheme, theme } = useTheme();
 
     const toggleTheme = () => {
         setTheme(theme === 'light' ? 'dark' : 'light');
     };
 
-    function onSubmit(values: z.infer<typeof contactFormSchema>) {
-        console.log(values);
-        toast({
-        title: "Message Sent!",
-        description: "Thanks for reaching out. I'll get back to you soon.",
-        });
-        form.reset();
-    }
     return (
         <div className={`min-h-screen bg-background font-body text-foreground`}>
        <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -422,13 +397,18 @@ export default function CrateCvPageClient() {
                 </CardHeader>
                 <CardContent className="flex flex-col sm:flex-row flex-wrap gap-4 items-center justify-center">
                 <a href="https://holopin.io/@raflimaulanarizki" target="_blank" rel="noopener noreferrer">
-                    <img src="https://holopin.me/raflimaulanarizki" alt="An image of @raflimaulanarizki's Holopin badges, which is a link to view their full Holopin profile" className="w-full max-w-xs sm:max-w-sm md:max-w-md"/>
+                    <Image src="https://holopin.me/raflimaulanarizki" alt="An image of @raflimaulanarizki's Holopin badges, which is a link to view their full Holopin profile" width={400} height={100} className="w-full max-w-xs sm:max-w-sm md:max-w-md"/>
                 </a>
                 <a href="https://ipv6.he.net/certification/" target="_blank" rel="noopener noreferrer">
-                    <img src="https://ipv6.he.net/certification/create_badge.php?pass_name=raflimaulanarizki&badge=2" alt="IPv6 Certification Badge" />
+                    <Image src="https://ipv6.he.net/certification/create_badge.php?pass_name=raflimaulanarizki&badge=2" alt="IPv6 Certification Badge" width={250} height={150} />
                 </a>
                 </CardContent>
             </Card>
+
+            <Suspense fallback={<div className="text-center p-8">Loading Contact Form...</div>}>
+                <ContactForm />
+            </Suspense>
+
             </div>
         </main>
 
@@ -455,3 +435,5 @@ export default function CrateCvPageClient() {
         </div>
     );
 }
+
+    
