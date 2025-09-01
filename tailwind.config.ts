@@ -138,7 +138,7 @@ export default {
               'padding': theme('spacing.4'),
               'border-radius': theme('borderRadius.lg'),
               'border': `1px solid ${theme('colors.border')}`,
-              'box-shadow': theme('boxShadow.md'),
+              'box-shadow': theme('boxShadow.lg'),
             },
             'pre code': {
                 'background-color': 'transparent',
