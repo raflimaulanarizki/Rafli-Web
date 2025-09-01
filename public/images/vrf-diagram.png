@@ -1,0 +1,1 @@
+<image of a network diagram showing two customer networks, Cust-A and Cust-B, connected to separate routers (Net1 and Net2) before VRF, and then connected to a single router with logically separated routing tables after VRF.>
