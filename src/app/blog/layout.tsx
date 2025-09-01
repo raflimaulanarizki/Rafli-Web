@@ -16,7 +16,7 @@ export default function BlogLayout({
   const { setTheme, theme } = useTheme();
 
   const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
+    setTheme(theme === 'light' ? 'dark' : 'light');
   };
 
   return (

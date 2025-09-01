@@ -189,7 +189,7 @@ export default function CrateCvPageClient() {
     const { setTheme, theme } = useTheme();
 
     const toggleTheme = () => {
-        setTheme(theme === 'dark' ? 'light' : 'dark');
+        setTheme(theme === 'light' ? 'dark' : 'light');
     };
 
     function onSubmit(values: z.infer<typeof contactFormSchema>) {
@@ -455,5 +455,3 @@ export default function CrateCvPageClient() {
         </div>
     );
 }
-
-    
