@@ -103,18 +103,22 @@ export default {
             'pre': {
               'background-color': 'transparent',
               'padding': '0',
-              'border-radius': '0',
               'font-size': 'inherit',
-            },
-            'code': {
-              'color': 'inherit',
-              'font-weight': 'normal',
+              'border-radius': theme('borderRadius.lg'),
             },
             'pre code': {
                 'background-color': 'transparent',
-                'padding': '0',
                 'border-radius': '0',
-                'font-size': 'inherit',
+                'padding': '0',
+                'font-weight': 'inherit',
+                'color': 'inherit',
+            },
+            'code:not(pre > code)': {
+                'background-color': theme('colors.secondary'),
+                'color': theme('colors.secondary-foreground'),
+                'padding': '0.2em 0.4em',
+                'border-radius': theme('borderRadius.sm'),
+                'font-weight': 'normal',
             },
             'code::before': {
               content: '""',
