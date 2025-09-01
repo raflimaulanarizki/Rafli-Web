@@ -163,41 +163,45 @@ export default function BlogSearchComponent({ initialPosts }: { initialPosts: an
                     <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                 </div>
 
-                <Card>
-                    <CardContent className="p-6">
-                        <h3 className="font-headline text-lg font-semibold mb-4 flex items-center gap-2"><Grid className="h-5 w-5 text-primary"/>Categories</h3>
-                        <div className="flex flex-wrap gap-2">
-                            {categories.map(cat => (
-                               <Link key={cat} href={createFilterURL('category', cat)} passHref>
-                                <Badge 
-                                  variant={categoryQuery?.toLowerCase() === cat.toLowerCase() ? "default" : "outline"}
-                                  className="cursor-pointer"
-                                >
-                                  {cat}
-                                </Badge>
-                              </Link>
-                            ))}
-                        </div>
-                    </CardContent>
-                </Card>
+                {categories && categories.length > 0 && (
+                  <Card>
+                      <CardContent className="p-6">
+                          <h3 className="font-headline text-lg font-semibold mb-4 flex items-center gap-2"><Grid className="h-5 w-5 text-primary"/>Categories</h3>
+                          <div className="flex flex-wrap gap-2">
+                              {categories.map(cat => (
+                                 <Link key={cat} href={createFilterURL('category', cat)} passHref>
+                                  <Badge 
+                                    variant={categoryQuery?.toLowerCase() === cat.toLowerCase() ? "default" : "outline"}
+                                    className="cursor-pointer"
+                                  >
+                                    {cat}
+                                  </Badge>
+                                </Link>
+                              ))}
+                          </div>
+                      </CardContent>
+                  </Card>
+                )}
                 
-                <Card>
-                    <CardContent className="p-6">
-                        <h3 className="font-headline text-lg font-semibold mb-4 flex items-center gap-2"><Tag className="h-5 w-5 text-primary"/>Tags</h3>
-                        <div className="flex flex-wrap gap-2">
-                            {allTags.map(tag => (
-                               <Link key={tag} href={createFilterURL('tag', tag)} passHref>
-                                <Badge 
-                                  variant={tagQuery?.toLowerCase() === tag.toLowerCase() ? "default" : "outline"}
-                                  className="cursor-pointer"
-                                >
-                                  {tag}
-                                </Badge>
-                              </Link>
-                            ))}
-                        </div>
-                    </CardContent>
-                </Card>
+                {allTags && allTags.length > 0 && (
+                  <Card>
+                      <CardContent className="p-6">
+                          <h3 className="font-headline text-lg font-semibold mb-4 flex items-center gap-2"><Tag className="h-5 w-5 text-primary"/>Tags</h3>
+                          <div className="flex flex-wrap gap-2">
+                              {allTags.map(tag => (
+                                 <Link key={tag} href={createFilterURL('tag', tag)} passHref>
+                                  <Badge 
+                                    variant={tagQuery?.toLowerCase() === tag.toLowerCase() ? "default" : "outline"}
+                                    className="cursor-pointer"
+                                  >
+                                    {tag}
+                                  </Badge>
+                                </Link>
+                              ))}
+                          </div>
+                      </CardContent>
+                  </Card>
+                )}
             </aside>
         </div>
       </main>
