@@ -26,9 +26,6 @@ export default function BlogLayout({
             MRMR
           </Link>
           <div className="flex items-center gap-2">
-            <Button variant="ghost" size="icon">
-              <Search className="h-5 w-5" />
-            </Button>
             <Button variant="ghost" size="icon" onClick={toggleTheme}>
               <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
               <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
@@ -49,10 +46,6 @@ export default function BlogLayout({
                    <Link href="/blog" className="flex items-center gap-2 text-lg font-medium hover:text-primary">
                     <Rss className="h-5 w-5" />
                     Blog
-                  </Link>
-                   <Link href="/" className="flex items-center gap-2 text-lg font-medium hover:text-primary">
-                    <Home className="h-5 w-5" />
-                    Back to CV
                   </Link>
                 </nav>
               </SheetContent>

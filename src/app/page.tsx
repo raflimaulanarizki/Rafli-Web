@@ -2,7 +2,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Award, Briefcase, Building, Calendar, CheckCircle, ChevronsRight, Dna, GraduationCap, Github, Languages, Linkedin, Mail, Server, Smartphone, Link as LinkIcon, ExternalLink, Router, Network, ShieldCheck, Star, FolderKanban, Medal, Rss, Menu, Moon, Sun } from "lucide-react";
+import { Award, Briefcase, Building, Calendar, CheckCircle, ChevronsRight, Dna, GraduationCap, Github, Languages, Linkedin, Mail, Server, Smartphone, Link as LinkIcon, ExternalLink, Router, Network, ShieldCheck, Star, FolderKanban, Medal, Rss, Menu, Moon, Sun, Home } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
@@ -221,8 +221,8 @@ function CrateCvPageClient() {
                 <SheetContent>
                     <nav className="flex flex-col gap-4 mt-8">
                     <Link href="/" className="flex items-center gap-2 text-lg font-medium hover:text-primary">
-                        <Dna className="h-5 w-5" />
-                        Profile
+                        <Home className="h-5 w-5" />
+                        Home
                     </Link>
                     <Link href="/blog" className="flex items-center gap-2 text-lg font-medium hover:text-primary">
                         <Rss className="h-5 w-5" />
@@ -459,5 +459,3 @@ export default function CrateCvPage() {
 
     return isClient ? <CrateCvPageClient /> : null;
 }
-
-    
