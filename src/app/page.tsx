@@ -20,6 +20,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import { useTheme } from "next-themes";
+import React from "react";
 
 const contactFormSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -178,275 +179,285 @@ const skillCategories = {
   "Others": "Vyos, FRR, IPv6, Ruijie, Ubiquiti, Perle, FTTX, OLT, TP-Link"
 };
 
-
-export default function CrateCvPage() {
-  const { toast } = useToast();
-  const form = useForm<z.infer<typeof contactFormSchema>>({
-    resolver: zodResolver(contactFormSchema),
-    defaultValues: { name: "", email: "", message: "" },
-  });
-  const { setTheme, theme } = useTheme();
-
-  const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
-  };
-
-  function onSubmit(values: z.infer<typeof contactFormSchema>) {
-    console.log(values);
-    toast({
-      title: "Message Sent!",
-      description: "Thanks for reaching out. I'll get back to you soon.",
+function CrateCvPageClient() {
+    const { toast } = useToast();
+    const form = useForm<z.infer<typeof contactFormSchema>>({
+        resolver: zodResolver(contactFormSchema),
+        defaultValues: { name: "", email: "", message: "" },
     });
-    form.reset();
-  }
+    const { setTheme, theme } = useTheme();
 
-  return (
-    <div className={`min-h-screen bg-background font-body text-foreground`}>
-      <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
-          <Link href="/" className="font-headline text-xl font-bold text-primary">
-            MRMR
-          </Link>
-          <div className="flex items-center gap-2">
-            <Button variant="ghost" size="icon" onClick={toggleTheme}>
-              <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-              <span className="sr-only">Toggle theme</span>
-            </Button>
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <Menu className="h-5 w-5" />
+    const toggleTheme = () => {
+        setTheme(theme === 'dark' ? 'light' : 'dark');
+    };
+
+    function onSubmit(values: z.infer<typeof contactFormSchema>) {
+        console.log(values);
+        toast({
+        title: "Message Sent!",
+        description: "Thanks for reaching out. I'll get back to you soon.",
+        });
+        form.reset();
+    }
+    return (
+        <div className={`min-h-screen bg-background font-body text-foreground`}>
+        <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+            <div className="container mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
+            <Link href="/" className="font-headline text-xl font-bold text-primary">
+                MRMR
+            </Link>
+            <div className="flex items-center gap-2">
+                <Button variant="ghost" size="icon" onClick={toggleTheme}>
+                <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+                <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+                <span className="sr-only">Toggle theme</span>
                 </Button>
-              </SheetTrigger>
-              <SheetContent>
-                <nav className="flex flex-col gap-4 mt-8">
-                  <Link href="/" className="flex items-center gap-2 text-lg font-medium hover:text-primary">
-                    <Dna className="h-5 w-5" />
-                    Profile
-                  </Link>
-                   <Link href="/blog" className="flex items-center gap-2 text-lg font-medium hover:text-primary">
-                    <Rss className="h-5 w-5" />
-                    Blog
-                  </Link>
-                </nav>
-              </SheetContent>
-            </Sheet>
-          </div>
-        </div>
-      </header>
-
-      <main className="container mx-auto max-w-6xl px-4 py-8 md:py-16">
-        <header className="mb-12 flex flex-col items-center text-center md:flex-row md:items-start md:text-left gap-8">
-          <Avatar className="h-28 w-28 md:h-32 md:w-32 border-4 border-primary shadow-lg">
-            <AvatarImage src="/photo.png" alt="Muhamad Rafli Maulana Rizki" />
-            <AvatarFallback>MRMR</AvatarFallback>
-          </Avatar>
-          <div className="flex-1">
-            <h1 className="font-headline text-3xl md:text-5xl font-bold text-primary">
-              Muhamad Rafli Maulana Rizki
-            </h1>
-            <p className="mt-2 text-base md:text-lg text-muted-foreground">
-              Network Engineer | Network Administrator | Network Operations Center
-            </p>
-            <div className="mt-4 flex flex-col sm:flex-row sm:justify-center md:justify-start items-center gap-x-4 gap-y-2 text-sm text-muted-foreground">
-              <a href="mailto:raflimaulanarizki8@gmail.com" className="flex items-center gap-2 hover:text-primary"><Mail className="h-4 w-4" /> raflimaulanarizki8@gmail.com</a>
-              <a href="https://linkedin.com/in/raflimaulanarizki" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-primary"><Linkedin className="h-4 w-4" /> raflimaulanarizki</a>
-              <a href="https://github.com/raflimaulanarizki" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-primary"><Github className="h-4 w-4" /> raflimaulana</a>
+                <Sheet>
+                <SheetTrigger asChild>
+                    <Button variant="ghost" size="icon">
+                    <Menu className="h-5 w-5" />
+                    </Button>
+                </SheetTrigger>
+                <SheetContent>
+                    <nav className="flex flex-col gap-4 mt-8">
+                    <Link href="/" className="flex items-center gap-2 text-lg font-medium hover:text-primary">
+                        <Dna className="h-5 w-5" />
+                        Profile
+                    </Link>
+                    <Link href="/blog" className="flex items-center gap-2 text-lg font-medium hover:text-primary">
+                        <Rss className="h-5 w-5" />
+                        Blog
+                    </Link>
+                    </nav>
+                </SheetContent>
+                </Sheet>
             </div>
-          </div>
+            </div>
         </header>
 
-        <div className="space-y-12">
-          
-          <Card id="profile" className="shadow-lg">
-            <CardHeader>
-              <CardTitle className="font-headline text-2xl md:text-3xl flex items-center gap-3"><Dna className="text-primary"/> Profile</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm md:text-base leading-relaxed">
-              Network & System Engineer with 2+ years of hands-on experience in designing, deploying, and maintaining enterprise networks across multi-vendor environments (Mikrotik, Cisco, Juniper, Ruijie, Ubiquiti). Skilled in data center networking, IPv6 deployment, network monitoring, and system administration (Linux, Proxmox, VMware). Proven track record in ensuring network reliability, redundancy, and scalability for ISPs and enterprises.
-              </p>
-            </CardContent>
-          </Card>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <Card className="shadow-lg">
-                <CardHeader className="pb-2">
-                  <CardTitle className="font-headline text-xl flex items-center gap-2"><GraduationCap className="text-primary h-5 w-5"/> Education</CardTitle>
+        <main className="container mx-auto max-w-6xl px-4 py-8 md:py-16">
+            <header className="mb-12 flex flex-col items-center text-center md:flex-row md:items-start md:text-left gap-8">
+            <Avatar className="h-28 w-28 md:h-32 md:w-32 border-4 border-primary shadow-lg">
+                <AvatarImage src="/photo.png" alt="Muhamad Rafli Maulana Rizki" />
+                <AvatarFallback>MRMR</AvatarFallback>
+            </Avatar>
+            <div className="flex-1">
+                <h1 className="font-headline text-3xl md:text-5xl font-bold text-primary">
+                Muhamad Rafli Maulana Rizki
+                </h1>
+                <p className="mt-2 text-base md:text-lg text-muted-foreground">
+                Network Engineer | Network Administrator | Network Operations Center
+                </p>
+                <div className="mt-4 flex flex-col sm:flex-row sm:justify-center md:justify-start items-center gap-x-4 gap-y-2 text-sm text-muted-foreground">
+                <a href="mailto:raflimaulanarizki8@gmail.com" className="flex items-center gap-2 hover:text-primary"><Mail className="h-4 w-4" /> raflimaulanarizki8@gmail.com</a>
+                <a href="https://linkedin.com/in/raflimaulanarizki" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-primary"><Linkedin className="h-4 w-4" /> raflimaulanarizki</a>
+                <a href="https://github.com/raflimaulanarizki" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-primary"><Github className="h-4 w-4" /> raflimaulana</a>
+                </div>
+            </div>
+            </header>
+
+            <div className="space-y-12">
+            
+            <Card id="profile" className="shadow-lg">
+                <CardHeader>
+                <CardTitle className="font-headline text-2xl md:text-3xl flex items-center gap-3"><Dna className="text-primary"/> Profile</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  {education.map((edu, index) => (
-                    <div key={index} className={index < education.length - 1 ? "mb-3 border-b pb-3 border-border/50" : ""}>
-                      <p className="font-semibold text-sm md:text-base">{edu.degree}</p>
-                      <p className="text-sm text-muted-foreground">{edu.institution}</p>
-                      <p className="text-xs text-muted-foreground">{edu.period}</p>
-                    </div>
-                  ))}
+                <p className="text-sm md:text-base leading-relaxed">
+                Network & System Engineer with 2+ years of hands-on experience in designing, deploying, and maintaining enterprise networks across multi-vendor environments (Mikrotik, Cisco, Juniper, Ruijie, Ubiquiti). Skilled in data center networking, IPv6 deployment, network monitoring, and system administration (Linux, Proxmox, VMware). Proven track record in ensuring network reliability, redundancy, and scalability for ISPs and enterprises.
+                </p>
                 </CardContent>
             </Card>
-            <Card className="shadow-lg">
-                <CardHeader className="pb-2">
-                    <CardTitle className="font-headline text-xl flex items-center gap-2"><FolderKanban className="text-primary h-5 w-5"/> Projects / Portfolios</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3">
-                    {projects.map((proj, index) => (
-                      <li key={index} className="flex items-start gap-3">
-                        <ChevronsRight className="h-4 w-4 text-primary mt-1 shrink-0"/>
-                        <div>
-                          <a href={proj.link} target="_blank" rel="noopener noreferrer" className="group font-semibold hover:text-primary hover:underline">
-                            <span className="text-sm md:text-base">{proj.name}</span>
-                            <ExternalLink className="inline-block h-3 w-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity"/>
-                          </a>
-                          <p className="text-sm text-muted-foreground">{proj.description}</p>
-                           <div className="flex flex-wrap gap-2 mt-2">
-                              {proj.tech.map(t => <Badge key={t} variant="secondary">{t}</Badge>)}
-                          </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <Card className="shadow-lg">
+                    <CardHeader className="pb-2">
+                    <CardTitle className="font-headline text-xl flex items-center gap-2"><GraduationCap className="text-primary h-5 w-5"/> Education</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                    {education.map((edu, index) => (
+                        <div key={index} className={index < education.length - 1 ? "mb-3 border-b pb-3 border-border/50" : ""}>
+                        <p className="font-semibold text-sm md:text-base">{edu.degree}</p>
+                        <p className="text-sm text-muted-foreground">{edu.institution}</p>
+                        <p className="text-xs text-muted-foreground">{edu.period}</p>
                         </div>
-                      </li>
                     ))}
-                  </ul>
-                </CardContent>
-            </Card>
-          </div>
-
-          <Card id="experience" className="shadow-lg">
-            <CardHeader>
-              <CardTitle className="font-headline text-2xl md:text-3xl flex items-center gap-3"><Briefcase className="text-primary"/> Experience</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <Accordion type="single" collapsible className="w-full">
-                {experiences.map((exp, index) => (
-                  <AccordionItem key={index} value={`item-${index}`}>
-                    <AccordionTrigger className="hover:no-underline text-left">
-                      <div className="flex flex-col md:flex-row md:items-center justify-between w-full">
-                        <div className="flex-1 mb-2 md:mb-0">
-                          <p className="text-primary font-semibold text-base md:text-lg">{exp.role}</p>
-                          <p className="text-sm font-normal text-muted-foreground flex items-center gap-2 mt-1">
-                            <Building className="h-4 w-4" /> {exp.company}
-                          </p>
-                        </div>
-                        <div className="text-sm font-normal text-muted-foreground flex items-center gap-2">
-                          <Calendar className="h-4 w-4" /> {exp.period}
-                        </div>
-                      </div>
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <ul className="list-disc space-y-2 pl-6 text-sm md:text-base mb-4">
-                        {exp.description.map((item, itemIndex) => <li key={itemIndex}>{item}</li>)}
-                      </ul>
-                       <div className="flex flex-wrap gap-2">
-                            {exp.tech.map(t => <Badge key={t} variant="secondary">{t}</Badge>)}
-                        </div>
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </CardContent>
-          </Card>
-          
-          <Card id="skills" className="shadow-lg">
-              <CardHeader>
-                <CardTitle className="font-headline text-2xl md:text-3xl flex items-center gap-3"><ShieldCheck className="text-primary"/> Technical Skills</CardTitle>
-              </CardHeader>
-              <CardContent>
-                 <Accordion type="multiple" className="w-full grid grid-cols-1 md:grid-cols-2 gap-x-6">
-                    {Object.entries(skillCategories).map(([category, skills], index) => (
-                      <AccordionItem key={index} value={`skill-item-${index}`}>
-                        <AccordionTrigger className="text-base md:text-lg font-semibold text-left">{category}</AccordionTrigger>
-                        <AccordionContent>
-                            <p className="text-sm text-muted-foreground whitespace-pre-line">{skills}</p>
-                        </AccordionContent>
-                      </AccordionItem>
-                    ))}
-                  </Accordion>
-              </CardContent>
-          </Card>
-
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <Card id="achievements" className="shadow-lg">
-                  <CardHeader>
-                      <CardTitle className="font-headline text-2xl md:text-3xl flex items-center gap-3"><Award className="text-primary" /> Achievements</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                      <ul className="space-y-3">
-                          {achievements.map((ach, index) => (
-                              <li key={index} className="flex items-start gap-3">
-                                <Star className="h-5 w-5 text-primary mt-1 shrink-0"/>
-                                <div>
-                                  <a href={ach.link} target="_blank" rel="noopener noreferrer" className="group font-semibold hover:text-primary hover:underline">
-                                    <p className="font-semibold text-sm md:text-base">{ach.name}
-                                      <ExternalLink className="inline-block h-3 w-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity"/>
-                                    </p>
-                                  </a>
-                                  <p className="text-sm text-muted-foreground">{ach.issuer}</p>
-                                </div>
-                              </li>
-                          ))}
-                      </ul>
-                  </CardContent>
-              </Card>
-              <Card id="certifications" className="shadow-lg">
-                  <CardHeader>
-                      <CardTitle className="font-headline text-2xl md:text-3xl flex items-center gap-3"><CheckCircle className="text-primary" /> Certifications</CardTitle>
-                  </CardHeader>
-                  <CardContent>
+                    </CardContent>
+                </Card>
+                <Card className="shadow-lg">
+                    <CardHeader className="pb-2">
+                        <CardTitle className="font-headline text-xl flex items-center gap-2"><FolderKanban className="text-primary h-5 w-5"/> Projects / Portfolios</CardTitle>
+                    </CardHeader>
+                    <CardContent>
                     <ul className="space-y-3">
-                        {certifications.map((cert, index) => (
-                            <li key={index} className="flex items-start gap-3">
-                              <ChevronsRight className="h-4 w-4 text-primary mt-1 shrink-0"/>
-                              <div>
-                                  <a href={cert.link} target="_blank" rel="noopener noreferrer" className="group font-semibold hover:text-primary hover:underline">
-                                      <span className="text-sm md:text-base">{cert.name}</span>
-                                      <ExternalLink className="inline-block h-3 w-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity"/>
-                                  </a>
-                                  <p className="text-sm text-muted-foreground">{cert.issuer}</p>
-                              </div>
-                            </li>
+                        {projects.map((proj, index) => (
+                        <li key={index} className="flex items-start gap-3">
+                            <ChevronsRight className="h-4 w-4 text-primary mt-1 shrink-0"/>
+                            <div>
+                            <a href={proj.link} target="_blank" rel="noopener noreferrer" className="group font-semibold hover:text-primary hover:underline">
+                                <span className="text-sm md:text-base">{proj.name}</span>
+                                <ExternalLink className="inline-block h-3 w-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity"/>
+                            </a>
+                            <p className="text-sm text-muted-foreground">{proj.description}</p>
+                            <div className="flex flex-wrap gap-2 mt-2">
+                                {proj.tech.map(t => <Badge key={t} variant="secondary">{t}</Badge>)}
+                            </div>
+                            </div>
+                        </li>
                         ))}
                     </ul>
-                  </CardContent>
-              </Card>
-          </div>
-          
-          <Card className="shadow-lg">
-            <CardHeader>
-              <CardTitle className="font-headline text-2xl md:text-3xl flex items-center gap-3"><Medal className="text-primary"/> Badges</CardTitle>
-            </CardHeader>
-            <CardContent className="flex flex-col sm:flex-row flex-wrap gap-4 items-center justify-center">
-              <a href="https://holopin.io/@raflimaulanarizki" target="_blank" rel="noopener noreferrer">
-                <img src="https://holopin.me/raflimaulanarizki" alt="An image of @raflimaulanarizki's Holopin badges, which is a link to view their full Holopin profile" className="w-full max-w-xs sm:max-w-sm md:max-w-md"/>
-              </a>
-              <a href="https://ipv6.he.net/certification/" target="_blank" rel="noopener noreferrer">
-                <img src="https://ipv6.he.net/certification/create_badge.php?pass_name=raflimaulanarizki&badge=2" alt="IPv6 Certification Badge" />
-              </a>
-            </CardContent>
-          </Card>
-        </div>
-      </main>
+                    </CardContent>
+                </Card>
+            </div>
 
-      <footer className="mt-16 border-t border-border/50 py-8">
-        <div className="container mx-auto flex flex-col items-center justify-between gap-4 text-center md:flex-row">
-          <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} Muhamad Rafli Maulana Rizki. All Rights Reserved.</p>
-          <div className="flex items-center gap-4">
-            <Link href="/blog" className="text-sm text-muted-foreground transition-colors hover:text-primary flex items-center gap-1">
-              <Rss className="h-4 w-4" />
-              Blog
-            </Link>
-            <Link href="https://www.linkedin.com/in/raflimaulanarizki" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <Linkedin className="h-6 w-6 text-muted-foreground transition-colors hover:text-primary" />
-            </Link>
-            <Link href="https://github.com/raflimaulanarizki" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-              <Github className="h-6 w-6 text-muted-foreground transition-colors hover:text-primary" />
-            </Link>
-            <a href="mailto:raflimaulanarizki8@gmail.com" aria-label="Mail">
-              <Mail className="h-6 w-6 text-muted-foreground transition-colors hover:text-primary" />
-            </a>
-          </div>
+            <Card id="experience" className="shadow-lg">
+                <CardHeader>
+                <CardTitle className="font-headline text-2xl md:text-3xl flex items-center gap-3"><Briefcase className="text-primary"/> Experience</CardTitle>
+                </CardHeader>
+                <CardContent>
+                <Accordion type="single" collapsible className="w-full">
+                    {experiences.map((exp, index) => (
+                    <AccordionItem key={index} value={`item-${index}`}>
+                        <AccordionTrigger className="hover:no-underline text-left">
+                        <div className="flex flex-col md:flex-row md:items-center justify-between w-full">
+                            <div className="flex-1 mb-2 md:mb-0">
+                            <p className="text-primary font-semibold text-base md:text-lg">{exp.role}</p>
+                            <p className="text-sm font-normal text-muted-foreground flex items-center gap-2 mt-1">
+                                <Building className="h-4 w-4" /> {exp.company}
+                            </p>
+                            </div>
+                            <div className="text-sm font-normal text-muted-foreground flex items-center gap-2">
+                            <Calendar className="h-4 w-4" /> {exp.period}
+                            </div>
+                        </div>
+                        </AccordionTrigger>
+                        <AccordionContent>
+                        <ul className="list-disc space-y-2 pl-6 text-sm md:text-base mb-4">
+                            {exp.description.map((item, itemIndex) => <li key={itemIndex}>{item}</li>)}
+                        </ul>
+                        <div className="flex flex-wrap gap-2">
+                                {exp.tech.map(t => <Badge key={t} variant="secondary">{t}</Badge>)}
+                            </div>
+                        </AccordionContent>
+                    </AccordionItem>
+                    ))}
+                </Accordion>
+                </CardContent>
+            </Card>
+            
+            <Card id="skills" className="shadow-lg">
+                <CardHeader>
+                    <CardTitle className="font-headline text-2xl md:text-3xl flex items-center gap-3"><ShieldCheck className="text-primary"/> Technical Skills</CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <Accordion type="multiple" className="w-full grid grid-cols-1 md:grid-cols-2 gap-x-6">
+                        {Object.entries(skillCategories).map(([category, skills], index) => (
+                        <AccordionItem key={index} value={`skill-item-${index}`}>
+                            <AccordionTrigger className="text-base md:text-lg font-semibold text-left">{category}</AccordionTrigger>
+                            <AccordionContent>
+                                <p className="text-sm text-muted-foreground whitespace-pre-line">{skills}</p>
+                            </AccordionContent>
+                        </AccordionItem>
+                        ))}
+                    </Accordion>
+                </CardContent>
+            </Card>
+
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <Card id="achievements" className="shadow-lg">
+                    <CardHeader>
+                        <CardTitle className="font-headline text-2xl md:text-3xl flex items-center gap-3"><Award className="text-primary" /> Achievements</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <ul className="space-y-3">
+                            {achievements.map((ach, index) => (
+                                <li key={index} className="flex items-start gap-3">
+                                    <Star className="h-5 w-5 text-primary mt-1 shrink-0"/>
+                                    <div>
+                                    <a href={ach.link} target="_blank" rel="noopener noreferrer" className="group font-semibold hover:text-primary hover:underline">
+                                        <p className="font-semibold text-sm md:text-base">{ach.name}
+                                        <ExternalLink className="inline-block h-3 w-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity"/>
+                                        </p>
+                                    </a>
+                                    <p className="text-sm text-muted-foreground">{ach.issuer}</p>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    </CardContent>
+                </Card>
+                <Card id="certifications" className="shadow-lg">
+                    <CardHeader>
+                        <CardTitle className="font-headline text-2xl md:text-3xl flex items-center gap-3"><CheckCircle className="text-primary" /> Certifications</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <ul className="space-y-3">
+                            {certifications.map((cert, index) => (
+                                <li key={index} className="flex items-start gap-3">
+                                <ChevronsRight className="h-4 w-4 text-primary mt-1 shrink-0"/>
+                                <div>
+                                    <a href={cert.link} target="_blank" rel="noopener noreferrer" className="group font-semibold hover:text-primary hover:underline">
+                                        <span className="text-sm md:text-base">{cert.name}</span>
+                                        <ExternalLink className="inline-block h-3 w-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity"/>
+                                    </a>
+                                    <p className="text-sm text-muted-foreground">{cert.issuer}</p>
+                                </div>
+                                </li>
+                            ))}
+                        </ul>
+                    </CardContent>
+                </Card>
+            </div>
+            
+            <Card className="shadow-lg">
+                <CardHeader>
+                <CardTitle className="font-headline text-2xl md:text-3xl flex items-center gap-3"><Medal className="text-primary"/> Badges</CardTitle>
+                </CardHeader>
+                <CardContent className="flex flex-col sm:flex-row flex-wrap gap-4 items-center justify-center">
+                <a href="https://holopin.io/@raflimaulanarizki" target="_blank" rel="noopener noreferrer">
+                    <img src="https://holopin.me/raflimaulanarizki" alt="An image of @raflimaulanarizki's Holopin badges, which is a link to view their full Holopin profile" className="w-full max-w-xs sm:max-w-sm md:max-w-md"/>
+                </a>
+                <a href="https://ipv6.he.net/certification/" target="_blank" rel="noopener noreferrer">
+                    <img src="https://ipv6.he.net/certification/create_badge.php?pass_name=raflimaulanarizki&badge=2" alt="IPv6 Certification Badge" />
+                </a>
+                </CardContent>
+            </Card>
+            </div>
+        </main>
+
+        <footer className="mt-16 border-t border-border/50 py-8">
+            <div className="container mx-auto flex flex-col items-center justify-between gap-4 text-center md:flex-row">
+            <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} Muhamad Rafli Maulana Rizki. All Rights Reserved.</p>
+            <div className="flex items-center gap-4">
+                <Link href="/blog" className="text-sm text-muted-foreground transition-colors hover:text-primary flex items-center gap-1">
+                <Rss className="h-4 w-4" />
+                Blog
+                </Link>
+                <Link href="https://www.linkedin.com/in/raflimaulanarizki" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <Linkedin className="h-6 w-6 text-muted-foreground transition-colors hover:text-primary" />
+                </Link>
+                <Link href="https://github.com/raflimaulanarizki" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <Github className="h-6 w-6 text-muted-foreground transition-colors hover:text-primary" />
+                </Link>
+                <a href="mailto:raflimaulanarizki8@gmail.com" aria-label="Mail">
+                <Mail className="h-6 w-6 text-muted-foreground transition-colors hover:text-primary" />
+                </a>
+            </div>
+            </div>
+        </footer>
         </div>
-      </footer>
-    </div>
-  );
+    );
 }
+
+export default function CrateCvPage() {
+    const [isClient, setIsClient] = React.useState(false);
+
+    React.useEffect(() => {
+        setIsClient(true);
+    }, []);
+
+    return isClient ? <CrateCvPageClient /> : null;
+}
+
+    
