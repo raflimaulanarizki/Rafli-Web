@@ -109,7 +109,7 @@ export default {
             '--tw-prose-quote-borders': theme('colors.primary'),
             '--tw-prose-captions': theme('colors.muted-foreground'),
             '--tw-prose-code': theme('colors.secondary-foreground'),
-            '--tw-prose-pre-code': theme('colors.card-foreground'),
+            '--tw-prose-pre-code': theme('colors.secondary-foreground'),
             '--tw-prose-pre-bg': theme('colors.secondary'),
             '--tw-prose-th-borders': theme('colors.border'),
             '--tw-prose-td-borders': theme('colors.border'),
