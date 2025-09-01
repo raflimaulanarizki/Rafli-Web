@@ -202,6 +202,7 @@ function BlogSearchComponent({ initialPosts }: { initialPosts: any[] }) {
   );
 }
 
+// This is now a Server Component
 export default function BlogPage() {
     const allPostsData = getSortedPostsData();
 
