@@ -70,7 +70,7 @@ const blogPosts = [
 ];
 
 const categories = ["System", "Pemrograman", "Syntax", "Themes", "VPN", "A Category with Slug"];
-const allTags = ["Network", "Mikrotik", "Cisco", "Juniper", "Markdown", "Proxmox", "VRF", "Css", "CustomTag", "EIGRP"];
+const allTags = ["Network", "Mikrotik", "Cisco", "Juniper", "Markdown", "Proxmox", "VRF", "Css", "CustomTag", "EIGRP", "Docker", "Homelab", "pfSense", "Security", "Firewall"];
 
 
 function BlogSearchComponent() {

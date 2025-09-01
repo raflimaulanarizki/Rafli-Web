@@ -6,22 +6,61 @@ import { Badge } from "@/components/ui/badge";
 import { Calendar, Clock, User } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
-// This is a placeholder for your actual blog post data fetching logic
-const getPostData = (slug: string) => {
-    // In a real app, you would fetch this data from a CMS or database
-    if (slug === 'virtual-routing-forwarding-vrf') {
-        return {
-            title: "Virtual Routing & Forwarding (VRF) - Lab",
-            description: "Virtual Routing and Forwarding (VRF) adalah teknologi virtualisasi jaringan yang memungkinkan beberapa instance routing table terpisah berjalan di perangkat jaringan yang sama.",
-            date: "2024-12-25",
-            readTime: "8 minutes to read",
-            author: "Muhamad Rafli Maulana Rizki",
-            tags: ["Cisco", "Network", "VRF"],
-            image: "https://picsum.photos/1200/400?random=1",
-            dataAiHint: "network router"
-        };
+const postsData: { [key: string]: any } = {
+    'virtual-routing-forwarding-vrf': {
+        title: "Virtual Routing & Forwarding (VRF) - Lab",
+        description: "Virtual Routing and Forwarding (VRF) adalah teknologi virtualisasi jaringan yang memungkinkan beberapa instance routing table terpisah berjalan di perangkat jaringan yang sama.",
+        date: "2024-12-25",
+        readTime: "8 minutes to read",
+        author: "Muhamad Rafli Maulana Rizki",
+        tags: ["Cisco", "Network", "VRF"],
+        image: "https://picsum.photos/1200/400?random=1",
+        dataAiHint: "network router"
+    },
+    'my-home-lab-setup': {
+        title: "My Home Lab Setup: A Network Engineer's Playground",
+        description: "An inside look at my personal home lab, the hardware I use, and how I use Proxmox and Docker for virtualization and containerization.",
+        date: "September 15, 2023",
+        readTime: "8 minutes to read",
+        author: "Muhamad Rafli Maulana Rizki",
+        tags: ["Proxmox", "Docker", "Homelab"],
+        image: "https://picsum.photos/1200/400?random=2",
+        dataAiHint: "server rack"
+    },
+    'securing-your-network-with-pfsense': {
+        title: "Securing Your Network with pfSense",
+        description: "A step-by-step guide to setting up a powerful open-source firewall with pfSense to protect your home or small business network.",
+        date: "August 02, 2023",
+        readTime: "10 minutes to read",
+        author: "Muhamad Rafli Maulana Rizki",
+        tags: ["pfSense", "Security", "Firewall"],
+        image: "https://picsum.photos/1200/400?random=3",
+        dataAiHint: "firewall security"
+    },
+    'qemu-guest-agent-proxmox': {
+        title: "Qemu Guest Agent - Proxmox",
+        description: "QEMU Guest Agent adalah program yang dijalankan di dalam Guest OS yang berjalan di bawah hypervisor QEMU/KVM...",
+        date: "July 20, 2023",
+        readTime: "5 minutes to read",
+        author: "Muhamad Rafli Maulana Rizki",
+        tags: ["System", "Proxmox"],
+        image: "https://picsum.photos/1200/400?random=4",
+        dataAiHint: "virtual machine"
+    },
+    'postfix-send-email-proxmox': {
+        title: "Postfix Send Email - Proxmox",
+        description: "Postfix adalah suatu software open-source yang berfungsi sebagai MTA (Mail Transfer Agent) yang digunakan untuk mengirim, menerima, dan memfilter email...",
+        date: "June 10, 2023",
+        readTime: "7 minutes to read",
+        author: "Muhamad Rafli Maulana Rizki",
+        tags: ["System", "Proxmox"],
+        image: "https://picsum.photos/1200/400?random=5",
+        dataAiHint: "email server"
     }
-    return null;
+};
+
+const getPostData = (slug: string) => {
+    return postsData[slug] || null;
 };
 
 export default function BlogPostPage({ params }: { params: { slug: string } }) {
