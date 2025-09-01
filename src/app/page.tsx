@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { useTheme } from "next-themes";
 import React, { Suspense } from "react";
 
@@ -172,7 +172,7 @@ export default function CrateCvPageClient() {
     const { setTheme, theme } = useTheme();
 
     const toggleTheme = () => {
-        setTheme(theme === 'light' ? 'dark' : 'light');
+      setTheme(theme === 'light' ? 'dark' : 'light');
     };
 
     return (
@@ -220,7 +220,6 @@ export default function CrateCvPageClient() {
             <header className="mb-12 flex flex-col items-center text-center md:flex-row md:items-start md:text-left gap-8">
             <Avatar className="h-28 w-28 md:h-32 md:w-32 border-4 border-primary shadow-lg">
                 <AvatarImage src="/photo.png" alt="Muhamad Rafli Maulana Rizki" />
-                <AvatarFallback>MRMR</AvatarFallback>
             </Avatar>
             <div className="flex-1">
                 <h1 className="font-headline text-3xl md:text-5xl font-bold text-primary">
