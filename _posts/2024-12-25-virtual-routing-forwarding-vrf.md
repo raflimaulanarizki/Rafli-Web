@@ -3,7 +3,7 @@ author: "Muhamad Rafli Maulana Rizki"
 title: "Virtual Routing & Forwarding (VRF)"
 date: "2024-12-25"
 readTime: "6 minutes to read"
-image: "/images/vrf-diagram.png"
+image: "/images/virtual-routing-forwarding-vrf/vrf-diagram.png"
 dataAiHint: "network router"
 description: "Virtual Routing and Forwarding (VRF) adalah teknologi virtualisasi jaringan yang memungkinkan beberapa instance routing table terpisah berjalan di perangkat jaringan yang sama."
 tags : [
@@ -34,7 +34,7 @@ toc:
       href: "#troubleshoot"
 ---
 
-![VRF Diagram](/images/vrf-diagram.png)
+![VRF Diagram](/images/virtual-routing-forwarding-vrf/vrf-diagram.png)
 
 ## 1. Pendahuluan VRF
 
@@ -311,3 +311,4 @@ VRF memungkinkan segmentasi tabel routing sehingga rute dari satu VRF tidak terl
     VRF info: (vrf in name/id, vrf out name/id)
       1 192.168.30.2 1 msec 0 msec 0 msec
     ```
+    
