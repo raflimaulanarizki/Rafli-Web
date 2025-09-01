@@ -100,14 +100,13 @@ export default {
             'h2, h3, h4': {
               'scroll-margin-top': theme('spacing.20'),
             },
-            pre: {
-              'background-color': theme('colors.muted'),
-              'padding': theme('spacing.4'),
-              'border-radius': theme('borderRadius.md'),
-              'font-size': theme('fontSize.sm'),
-              'overflow-x': 'auto',
+            'pre': {
+              'background-color': 'transparent',
+              'padding': '0',
+              'border-radius': '0',
+              'font-size': 'inherit',
             },
-            code: {
+            'code': {
               'color': 'inherit',
               'font-weight': 'normal',
             },

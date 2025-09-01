@@ -5,6 +5,10 @@ import { remark } from 'remark';
 import html from 'remark-html';
 import { visit } from 'unist-util-visit';
 import { slug } from 'github-slugger';
+import remarkParse from 'remark-parse';
+import remarkRehype from 'remark-rehype';
+import rehypeParse from 'rehype-parse';
+import { unified } from 'unified';
 
 const postsDirectory = path.join(process.cwd(), '_posts');
 
@@ -97,9 +101,12 @@ export async function getPostData(slugId: string): Promise<PostData> {
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const matterResult = matter(fileContents);
 
-  const processedContent = await remark()
-    .use(html, { sanitize: false })
+  const processedContent = await unified()
+    .use(remarkParse)
+    .use(remarkRehype)
+    .use(html)
     .process(matterResult.content);
+
   const contentHtml = processedContent.toString();
 
   const readTime = calculateReadTime(matterResult.content);

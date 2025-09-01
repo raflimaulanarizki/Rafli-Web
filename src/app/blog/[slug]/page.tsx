@@ -5,8 +5,14 @@ import { Badge } from "@/components/ui/badge";
 import { Calendar, Clock, User } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
-import React from "react";
+import React, { createElement, Fragment } from "react";
 import { notFound } from 'next/navigation';
+import { unified } from 'unified';
+import rehypeParse from 'rehype-parse';
+import { visit } from 'unist-util-visit';
+import rehypeReact from 'rehype-react';
+import { CodeBlock } from '@/components/ui/code-block';
+
 
 export async function generateStaticParams() {
   const paths = getAllPostIds();
@@ -35,6 +41,29 @@ const renderToc = (items: TocEntry[]) => {
     return createList(items, 2);
 }
 
+// Function to add scroll-mt-20 to section headers
+const addScrollMarginToHeadings = (html: string) => {
+    const tree = unified().use(rehypeParse, { fragment: true }).parse(html);
+    visit(tree, 'element', (node: any) => {
+        if (node.tagName[0] === 'h' && node.properties && node.properties.id) {
+            node.properties.className = (node.properties.className || []).concat('scroll-mt-20');
+        }
+    });
+    return unified().stringify(tree);
+};
+
+
+const contentProcessor = unified()
+    .use(rehypeParse, { fragment: true })
+    .use(rehypeReact, {
+        createElement,
+        Fragment,
+        components: {
+           pre: CodeBlock,
+        },
+    });
+
+
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {
     let post;
     try {
@@ -47,18 +76,9 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
         notFound();
     }
 
-    // Function to add scroll-mt-20 to section headers
-    const addScrollMarginToHeadings = (html: string) => {
-        return html.replace(/<h([1-6])(.*?)>/g, (match, level, attrs) => {
-            const existingId = attrs.match(/id="([^"]*)"/);
-            if (existingId) {
-                return `<h${level}${attrs} class="scroll-mt-20">`;
-            }
-            return match; // Should not happen if slugging works
-        });
-    }
+    const htmlWithScrollMargin = addScrollMarginToHeadings(post.contentHtml);
+    const content = contentProcessor.processSync(htmlWithScrollMargin).result;
 
-    const processedHtml = addScrollMarginToHeadings(post.contentHtml);
 
     return (
         <main className="container mx-auto max-w-4xl px-4 py-8 md:py-12">
@@ -110,7 +130,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                     </Card>
                 )}
 
-                <div dangerouslySetInnerHTML={{ __html: processedHtml }} />
+                <div>{content}</div>
             </article>
         </main>
     );
