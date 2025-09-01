@@ -1,4 +1,6 @@
 
+'use client';
+
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, Grid, Home, List, Rss, Search, Tag, Folder, Bookmark } from "lucide-react";
 import Link from "next/link";
@@ -6,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
+import React, { useState, useEffect, Suspense } from "react";
+import { useRouter, useSearchParams } from 'next/navigation';
 
 const blogPosts = [
   {
@@ -40,6 +44,28 @@ const blogPosts = [
     dataAiHint: "firewall security",
     tags: ["pfSense", "Security", "Firewall"],
     link: "#"
+  },
+  {
+    title: "Qemu Guest Agent - Proxmox",
+    description: "QEMU Guest Agent adalah program yang dijalankan di dalam Guest OS yang berjalan di bawah hypervisor QEMU/KVM. Fungsinya adalah untuk menyediakan berbagai informasi dan layanan terkait Guest OS kepada hypervisor atau manajemen Proxmox seperti menjalankan command pada guest. Di Proxmox VE, QEMU Guest Agent menyediakan fitur-fitur berikut: Monitoring Sistem: QE...",
+    date: "July 20, 2023",
+    readTime: "5 minutes to read",
+    author: "Muhamad Rafli Maulana Rizki",
+    image: "https://picsum.photos/800/400?random=4",
+    dataAiHint: "virtual machine",
+    tags: ["System", "Proxmox"],
+    link: "#"
+  },
+  {
+    title: "Postfix Send Email - Proxmox",
+    description: "Postfix adalah suatu software open-source yang berfungsi sebagai MTA (Mail Transfer Agent) yang digunakan untuk mengirim, menerima, dan memfilter email, Cara Postfix berkomunikasi yakni menggunakan protocol SMTP. Postfix berguna untuk send email ke mail server, contoh seperti mail company, gmail ataupun lainnya. Setting Postfix Install dependencies apt updat...",
+    date: "June 10, 2023",
+    readTime: "7 minutes to read",
+    author: "Muhamad Rafli Maulana Rizki",
+    image: "https://picsum.photos/800/400?random=5",
+    dataAiHint: "email server",
+    tags: ["System", "Proxmox"],
+    link: "#"
   }
 ];
 
@@ -47,7 +73,53 @@ const categories = ["System", "Pemrograman", "Syntax", "Themes", "VPN", "A Categ
 const allTags = ["Network", "Mikrotik", "Cisco", "Juniper", "Markdown", "Proxmox", "VRF", "Css", "CustomTag", "EIGRP"];
 
 
-export default function BlogPage() {
+function BlogSearchComponent() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const searchQuery = searchParams.get('q') || '';
+  const [filteredPosts, setFilteredPosts] = useState(blogPosts);
+
+  useEffect(() => {
+    if (searchQuery) {
+      const lowercasedQuery = searchQuery.toLowerCase();
+      const results = blogPosts.filter(post =>
+        post.title.toLowerCase().includes(lowercasedQuery) ||
+        post.description.toLowerCase().includes(lowercasedQuery) ||
+        post.tags.some(tag => tag.toLowerCase().includes(lowercasedQuery))
+      );
+      setFilteredPosts(results);
+    } else {
+      setFilteredPosts(blogPosts);
+    }
+  }, [searchQuery]);
+
+  const handleSearch = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      const query = event.currentTarget.value;
+      router.push(`/blog?q=${query}`);
+    }
+  };
+
+  const highlightText = (text: string, highlight: string) => {
+    if (!highlight.trim()) {
+      return <span>{text}</span>;
+    }
+    const regex = new RegExp(`(${highlight})`, 'gi');
+    const parts = text.split(regex);
+    return (
+      <span>
+        {parts.map((part, i) =>
+          regex.test(part) ? (
+            <span key={i} className="bg-primary/80 text-primary-foreground p-1 rounded-md">{part}</span>
+          ) : (
+            <span key={i}>{part}</span>
+          )
+        )}
+      </span>
+    );
+  };
+
+
   return (
     <div className="bg-background text-foreground">
       <main className="container mx-auto max-w-6xl px-4 py-8 md:py-16">
@@ -63,7 +135,7 @@ export default function BlogPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Main Content */}
             <div className="lg:col-span-2 space-y-8">
-              {blogPosts.map((post, index) => (
+              {filteredPosts.length > 0 ? filteredPosts.map((post, index) => (
                 <Card key={index} className="flex flex-col overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
                    <Link href={post.link} className="block">
                       <Image
@@ -78,10 +150,10 @@ export default function BlogPage() {
                   <CardContent className="p-6">
                     <h2 className="font-headline text-2xl font-bold mb-2">
                       <Link href={post.link} className="hover:text-primary hover:underline">
-                        {post.title}
+                        {highlightText(post.title, searchQuery)}
                       </Link>
                     </h2>
-                    <p className="text-muted-foreground mb-4">{post.description}</p>
+                    <p className="text-muted-foreground mb-4">{highlightText(post.description, searchQuery)}</p>
                     <div className="flex flex-wrap gap-2 mb-4">
                       {post.tags.map(tag => <Badge key={tag} variant="secondary"># {tag}</Badge>)}
                     </div>
@@ -92,13 +164,15 @@ export default function BlogPage() {
                     </div>
                   </CardContent>
                 </Card>
-              ))}
+              )) : (
+                <p>No posts found for your search.</p>
+              )}
             </div>
 
             {/* Sidebar */}
             <aside className="lg:col-span-1 space-y-8">
                 <div className="relative">
-                    <Input placeholder="Search..." className="pr-10" />
+                    <Input placeholder="Search..." className="pr-10" onKeyDown={handleSearch} defaultValue={searchQuery}/>
                     <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                 </div>
 
@@ -130,4 +204,13 @@ export default function BlogPage() {
       </footer>
     </div>
   );
+}
+
+
+export default function BlogPage() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <BlogSearchComponent />
+        </Suspense>
+    )
 }
