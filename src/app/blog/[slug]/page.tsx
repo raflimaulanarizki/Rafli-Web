@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, Clock, User } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import Link from "next/link";
 
 const postsData: { [key: string]: any } = {
     'virtual-routing-forwarding-vrf': {
@@ -104,7 +105,11 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
                 </div>
 
                 <div className="flex flex-wrap gap-2 mb-8">
-                    {post.tags.map(tag => <Badge key={tag} variant="secondary"># {tag}</Badge>)}
+                    {post.tags.map(tag => (
+                        <Link key={tag} href={`/blog?tag=${tag}`} passHref>
+                            <Badge variant="secondary" className="cursor-pointer hover:bg-primary/80"># {tag}</Badge>
+                        </Link>
+                    ))}
                 </div>
 
                 <Card className="mb-12">
