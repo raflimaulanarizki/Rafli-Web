@@ -15,6 +15,7 @@ export default function BlogLayout({
   const [theme, setTheme] = useState('dark');
 
   useEffect(() => {
+    // On mount, read the theme from localStorage
     const storedTheme = localStorage.getItem('theme');
     if (storedTheme) {
       setTheme(storedTheme);
@@ -22,6 +23,7 @@ export default function BlogLayout({
   }, []);
 
   useEffect(() => {
+    // When theme changes, update body class and localStorage
     document.documentElement.classList.remove('light', 'dark');
     document.documentElement.classList.add(theme);
     localStorage.setItem('theme', theme);
