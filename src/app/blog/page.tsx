@@ -11,101 +11,42 @@ import { Input } from "@/components/ui/input";
 import React, { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from 'next/navigation';
 import { cn } from "@/lib/utils";
-
-const blogPosts = [
-  {
-    title: "Virtual Routing & Forwarding (VRF)",
-    description: "Virtual Routing and Forwarding (VRF) adalah teknologi virtualisasi jaringan yang memungkinkan beberapa instance routing table terpisah berjalan di perangkat jaringan yang sama.",
-    date: "2024-12-25",
-    readTime: "6 minutes to read",
-    author: "Muhamad Rafli Maulana Rizki",
-    image: "https://picsum.photos/800/400?random=1",
-    dataAiHint: "network virtualization",
-    tags: ["Cisco", "Network", "VRF"],
-    slug: "virtual-routing-forwarding-vrf"
-  },
-  {
-    title: "My Home Lab Setup: A Network Engineer's Playground",
-    description: "An inside look at my personal home lab, the hardware I use, and how I use Proxmox and Docker for virtualization and containerization.",
-    date: "September 15, 2023",
-    readTime: "8 minutes to read",
-    author: "Muhamad Rafli Maulana Rizki",
-    image: "https://picsum.photos/800/400?random=2",
-    dataAiHint: "server rack",
-    tags: ["Proxmox", "Docker", "Homelab"],
-    slug: "my-home-lab-setup"
-  },
-  {
-    title: "Securing Your Network with pfSense",
-    description: "A step-by-step guide to setting up a powerful open-source firewall with pfSense to protect your home or small business network.",
-    date: "August 02, 2023",
-    readTime: "10 minutes to read",
-    author: "Muhamad Rafli Maulana Rizki",
-    image: "https://picsum.photos/800/400?random=3",
-    dataAiHint: "firewall security",
-    tags: ["pfSense", "Security", "Firewall"],
-    slug: "securing-your-network-with-pfsense"
-  },
-  {
-    title: "Qemu Guest Agent - Proxmox",
-    description: "QEMU Guest Agent adalah program yang dijalankan di dalam Guest OS yang berjalan di bawah hypervisor QEMU/KVM. Fungsinya adalah untuk menyediakan berbagai informasi dan layanan terkait Guest OS kepada hypervisor atau manajemen Proxmox seperti menjalankan command pada guest. Di Proxmox VE, QEMU Guest Agent menyediakan fitur-fitur berikut: Monitoring Sistem: QE...",
-    date: "July 20, 2023",
-    readTime: "5 minutes to read",
-    author: "Muhamad Rafli Maulana Rizki",
-    image: "https://picsum.photos/800/400?random=4",
-    dataAiHint: "virtual machine",
-    tags: ["System", "Proxmox"],
-    slug: "qemu-guest-agent-proxmox"
-  },
-  {
-    title: "Postfix Send Email - Proxmox",
-    description: "Postfix adalah suatu software open-source yang berfungsi sebagai MTA (Mail Transfer Agent) yang digunakan untuk mengirim, menerima, dan memfilter email, Cara Postfix berkomunikasi yakni menggunakan protocol SMTP. Postfix berguna untuk send email ke mail server, contoh seperti mail company, gmail ataupun lainnya. Setting Postfix Install dependencies apt updat...",
-    date: "June 10, 2023",
-    readTime: "7 minutes to read",
-    author: "Muhamad Rafli Maulana Rizki",
-    image: "https://picsum.photos/800/400?random=5",
-    dataAiHint: "email server",
-    tags: ["System", "Proxmox"],
-    slug: "postfix-send-email-proxmox"
-  }
-];
+import { getSortedPostsData } from '@/lib/posts';
 
 const categories = ["System", "Pemrograman", "Syntax", "Themes", "VPN", "A Category with Slug", "Cisco", "Proxmox", "pfSense"];
 const allTags = ["Network", "Mikrotik", "Cisco", "Juniper", "Markdown", "Proxmox", "VRF", "Css", "CustomTag", "EIGRP", "Docker", "Homelab", "pfSense", "Security", "Firewall", "System"];
 
-
-function BlogSearchComponent() {
+function BlogSearchComponent({ initialPosts }: { initialPosts: any[] }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const searchQuery = searchParams.get('q') || '';
   const categoryQuery = searchParams.get('category');
   const tagQuery = searchParams.get('tag');
 
-  const [filteredPosts, setFilteredPosts] = useState(blogPosts);
+  const [filteredPosts, setFilteredPosts] = useState(initialPosts);
 
   useEffect(() => {
-    let results = blogPosts;
+    let results = initialPosts;
 
     if (searchQuery) {
       const lowercasedQuery = searchQuery.toLowerCase();
       results = results.filter(post =>
         post.title.toLowerCase().includes(lowercasedQuery) ||
         post.description.toLowerCase().includes(lowercasedQuery) ||
-        post.tags.some(tag => tag.toLowerCase().includes(lowercasedQuery))
+        post.tags.some((tag: string) => tag.toLowerCase().includes(lowercasedQuery))
       );
     }
 
     if(categoryQuery) {
-      results = results.filter(post => post.tags.map(t => t.toLowerCase()).includes(categoryQuery.toLowerCase()));
+      results = results.filter(post => post.tags.map((t: string) => t.toLowerCase()).includes(categoryQuery.toLowerCase()));
     }
     
     if(tagQuery) {
-      results = results.filter(post => post.tags.map(t => t.toLowerCase()).includes(tagQuery.toLowerCase()));
+      results = results.filter(post => post.tags.map((t: string) => t.toLowerCase()).includes(tagQuery.toLowerCase()));
     }
 
-
     setFilteredPosts(results);
-  }, [searchQuery, categoryQuery, tagQuery]);
+  }, [searchQuery, categoryQuery, tagQuery, initialPosts]);
 
   const handleSearch = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
@@ -129,7 +70,6 @@ function BlogSearchComponent() {
     return `/blog?${params.toString()}`;
   }
 
-
   const highlightText = (text: string, highlight: string) => {
     if (!highlight.trim()) {
       return <span>{text}</span>;
@@ -149,7 +89,6 @@ function BlogSearchComponent() {
     );
   };
 
-
   return (
     <div className="bg-background text-foreground">
       <main className="container mx-auto max-w-6xl px-4 py-8 md:py-16">
@@ -167,7 +106,7 @@ function BlogSearchComponent() {
             <div className="lg:col-span-2 space-y-8">
               {filteredPosts.length > 0 ? filteredPosts.map((post, index) => (
                 <Card key={index} className="flex flex-col overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                   <Link href={`/blog/${post.slug}`} className="block">
+                   <Link href={`/blog/${post.id}`} className="block">
                       <Image
                         src={post.image}
                         alt={post.title}
@@ -179,13 +118,13 @@ function BlogSearchComponent() {
                   </Link>
                   <CardContent className="p-6">
                     <h2 className="font-headline text-2xl font-bold mb-2">
-                       <Link href={`/blog/${post.slug}`} className="hover:text-primary hover:underline">
+                       <Link href={`/blog/${post.id}`} className="hover:text-primary hover:underline">
                         {highlightText(post.title, searchQuery)}
                       </Link>
                     </h2>
                     <p className="text-muted-foreground mb-4">{highlightText(post.description, searchQuery)}</p>
                     <div className="flex flex-wrap gap-2 mb-4">
-                      {post.tags.map(tag => (
+                      {post.tags.map((tag: string) => (
                          <Link key={tag} href={createFilterURL('tag', tag)} passHref>
                           <Badge 
                             variant={tagQuery?.toLowerCase() === tag.toLowerCase() ? "default" : "secondary"}
@@ -263,13 +202,12 @@ function BlogSearchComponent() {
   );
 }
 
-
 export default function BlogPage() {
+    const allPostsData = getSortedPostsData();
+
     return (
         <Suspense fallback={<div>Loading...</div>}>
-            <BlogSearchComponent />
+            <BlogSearchComponent initialPosts={allPostsData} />
         </Suspense>
     )
 }
-
-    
