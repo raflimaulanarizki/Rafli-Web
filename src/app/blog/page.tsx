@@ -51,7 +51,7 @@ const allTags = ["Network", "Mikrotik", "Cisco", "Juniper", "Markdown", "Proxmox
 export default function BlogPage() {
   return (
     <div className="bg-background text-foreground">
-      <main className="container mx-auto max-w-7xl px-4 py-8">
+      <main className="container mx-auto max-w-6xl px-4 py-8 md:py-16">
          <div className="mb-12 text-center">
             <h1 className="font-headline text-4xl md:text-5xl font-bold text-primary">
               My Blog
