@@ -109,7 +109,7 @@ export default {
             '--tw-prose-quote-borders': theme('colors.primary'),
             '--tw-prose-captions': theme('colors.muted-foreground'),
             '--tw-prose-code': theme('colors.secondary-foreground'),
-            '--tw-prose-pre-code': theme('colors.secondary-foreground'),
+            '--tw-prose-pre-code': theme('colors.card-foreground'),
             '--tw-prose-pre-bg': theme('colors.secondary'),
             '--tw-prose-th-borders': theme('colors.border'),
             '--tw-prose-td-borders': theme('colors.border'),
@@ -137,6 +137,8 @@ export default {
               'background-color': 'var(--tw-prose-pre-bg)',
               'padding': theme('spacing.4'),
               'border-radius': theme('borderRadius.lg'),
+              'border': `1px solid ${theme('colors.border')}`,
+              'box-shadow': theme('boxShadow.md'),
             },
             'pre code': {
                 'background-color': 'transparent',
