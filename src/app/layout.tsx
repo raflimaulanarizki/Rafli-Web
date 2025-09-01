@@ -28,6 +28,7 @@ export default function RootLayout({
             defaultTheme="light"
             enableSystem={false}
             disableTransitionOnChange
+            storageKey="theme-rafli-web"
         >
           {children}
           <Toaster />
