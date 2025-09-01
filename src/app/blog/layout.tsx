@@ -1,10 +1,9 @@
 
 'use client';
 
-import { Moon, Sun, Search, Menu, Rss, Home } from 'lucide-react';
+import { Moon, Sun, Menu, Rss, Home } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
 
@@ -34,23 +33,12 @@ export default function BlogLayout({
             </Button>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="rounded-full">
-                   <Avatar className="h-8 w-8">
-                     <AvatarImage src="/photo.png" alt="Muhamad Rafli Maulana Rizki" />
-                     <AvatarFallback>MRMR</AvatarFallback>
-                   </Avatar>
+                <Button variant="ghost" size="icon">
+                  <Menu className="h-5 w-5" />
+                  <span className="sr-only">Open menu</span>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56" align="end">
-                <DropdownMenuLabel>
-                  <div className="flex flex-col space-y-1">
-                    <p className="text-sm font-medium leading-none">Muhamad Rafli Maulana Rizki</p>
-                    <p className="text-xs leading-none text-muted-foreground">
-                      raflimaulanarizki8@gmail.com
-                    </p>
-                  </div>
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator />
+              <DropdownMenuContent className="w-48" align="end">
                 <DropdownMenuGroup>
                   <Link href="/">
                     <DropdownMenuItem>
