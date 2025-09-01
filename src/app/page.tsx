@@ -204,8 +204,8 @@ function CrateCvPageClient() {
         <div className={`min-h-screen bg-background font-body text-foreground`}>
        <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
-          <Link href="/" className="font-headline text-xl font-bold text-primary">
-            MRMR
+          <Link href="/">
+            <Image src="/logo.png" alt="MRMR Logo" width={40} height={40} />
           </Link>
           <div className="flex items-center gap-2">
             <Button variant="ghost" size="icon" onClick={toggleTheme}>
