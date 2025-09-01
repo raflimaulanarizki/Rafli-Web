@@ -52,20 +52,19 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
     return (
         <main className="container mx-auto max-w-6xl px-4 py-8 md:py-12">
             <Card>
+                <div className="mb-0">
+                    <Image
+                        src={post.image}
+                        alt={post.title}
+                        width={1200}
+                        height={400}
+                        data-ai-hint={post.dataAiHint}
+                        className="w-full rounded-t-lg shadow-lg object-cover"
+                    />
+                </div>
                 <CardContent className="p-6 md:p-8">
                     <article className="prose dark:prose-invert max-w-none">
-                        <div className="mb-8">
-                            <Image
-                                src={post.image}
-                                alt={post.title}
-                                width={1200}
-                                height={400}
-                                data-ai-hint={post.dataAiHint}
-                                className="w-full rounded-lg shadow-lg object-cover"
-                            />
-                        </div>
-
-                        <h1 className="font-headline text-4xl md:text-5xl font-bold text-primary mb-4">{post.title}</h1>
+                        <h1 className="font-headline text-4xl md:text-5xl font-bold text-primary mb-4 mt-0">{post.title}</h1>
                         
                         <p className="text-muted-foreground text-lg mb-6">{post.description}</p>
                         
