@@ -54,7 +54,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
 
     return (
         <main className="container mx-auto max-w-4xl px-4 py-8 md:py-12">
-            <article className="prose dark:prose-invert prose-lg max-w-none">
+            <article className="prose dark:prose-invert max-w-none">
                 <div className="mb-8">
                     <Image
                         src={post.image}
@@ -94,9 +94,9 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                 </div>
 
                 {post.toc && post.toc.length > 0 && (
-                    <Card className="mb-12">
+                    <Card className="mb-12 not-prose">
                         <CardContent className="p-6">
-                            <h2 className="font-headline text-2xl font-semibold mb-4">Table of Contents</h2>
+                            <h2 className="font-headline text-2xl font-semibold mb-4 mt-0">Table of Contents</h2>
                             {renderToc(post.toc)}
                         </CardContent>
                     </Card>
