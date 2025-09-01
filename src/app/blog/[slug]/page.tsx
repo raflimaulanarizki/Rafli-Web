@@ -3,7 +3,7 @@ import { getPostData, getAllPostIds, TocEntry } from '@/lib/posts';
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, Clock, User } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 import React from "react";
 import { notFound } from 'next/navigation';
@@ -51,58 +51,64 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
 
     return (
         <main className="container mx-auto max-w-4xl px-4 py-8 md:py-12">
-            <article className="prose dark:prose-invert max-w-none">
-                <div className="mb-8">
-                    <Image
-                        src={post.image}
-                        alt={post.title}
-                        width={1200}
-                        height={400}
-                        data-ai-hint={post.dataAiHint}
-                        className="w-full rounded-lg shadow-lg object-cover"
-                    />
-                </div>
+            <Card>
+                <CardContent className="p-6">
+                    <article className="prose dark:prose-invert max-w-none">
+                        <div className="mb-8">
+                            <Image
+                                src={post.image}
+                                alt={post.title}
+                                width={1200}
+                                height={400}
+                                data-ai-hint={post.dataAiHint}
+                                className="w-full rounded-lg shadow-lg object-cover"
+                            />
+                        </div>
 
-                <h1 className="font-headline text-4xl md:text-5xl font-bold text-primary mb-4">{post.title}</h1>
-                
-                <p className="text-muted-foreground text-lg mb-6">{post.description}</p>
-                
-                <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-muted-foreground mb-8 text-sm">
-                    <div className="flex items-center gap-2">
-                        <Calendar className="h-4 w-4"/>
-                        <span>{post.date}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <Clock className="h-4 w-4"/>
-                        <span>{post.readTime}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <User className="h-4 w-4"/>
-                        <span>{post.author}</span>
-                    </div>
-                </div>
+                        <h1 className="font-headline text-4xl md:text-5xl font-bold text-primary mb-4">{post.title}</h1>
+                        
+                        <p className="text-muted-foreground text-lg mb-6">{post.description}</p>
+                        
+                        <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-muted-foreground mb-8 text-sm">
+                            <div className="flex items-center gap-2">
+                                <Calendar className="h-4 w-4"/>
+                                <span>{post.date}</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <Clock className="h-4 w-4"/>
+                                <span>{post.readTime}</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <User className="h-4 w-4"/>
+                                <span>{post.author}</span>
+                            </div>
+                        </div>
 
-                <div className="flex flex-wrap gap-2 mb-8">
-                    {post.tags.map((tag: string) => (
-                        <Link key={tag} href={`/blog?tag=${tag}`} passHref>
-                            <Badge variant="secondary" className="cursor-pointer hover:bg-primary/80"># {tag}</Badge>
-                        </Link>
-                    ))}
-                </div>
+                        <div className="flex flex-wrap gap-2 mb-8">
+                            {post.tags.map((tag: string) => (
+                                <Link key={tag} href={`/blog?tag=${tag}`} passHref>
+                                    <Badge variant="secondary" className="cursor-pointer hover:bg-primary/80"># {tag}</Badge>
+                                </Link>
+                            ))}
+                        </div>
 
-                {post.toc && post.toc.length > 0 && (
-                    <Card className="mb-12 not-prose">
-                        <CardContent className="p-6">
-                            <h2 className="font-headline text-2xl font-semibold mb-4 mt-0">Table of Contents</h2>
-                            {renderToc(post.toc)}
-                        </CardContent>
-                    </Card>
-                )}
+                        {post.toc && post.toc.length > 0 && (
+                            <Card className="mb-12 not-prose bg-background/50">
+                                <CardHeader>
+                                    <CardTitle className="font-headline text-2xl font-semibold mb-0 mt-0">Table of Contents</CardTitle>
+                                </CardHeader>
+                                <CardContent className="p-6 pt-0">
+                                    {renderToc(post.toc)}
+                                </CardContent>
+                            </Card>
+                        )}
 
-                 <CodeBlockWrapper>
-                    <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} />
-                </CodeBlockWrapper>
-            </article>
+                        <CodeBlockWrapper>
+                            <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} />
+                        </CodeBlockWrapper>
+                    </article>
+                </CardContent>
+            </Card>
         </main>
     );
 }
