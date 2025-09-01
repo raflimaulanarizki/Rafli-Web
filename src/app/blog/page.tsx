@@ -1,3 +1,4 @@
+
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, Grid, Home, List, Rss, Search, Tag, Folder, Bookmark } from "lucide-react";
 import Link from "next/link";
@@ -49,27 +50,7 @@ const allTags = ["Network", "Mikrotik", "Cisco", "Juniper", "Markdown", "Proxmox
 
 export default function BlogPage() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <header className="border-b border-border/50">
-        <div className="container mx-auto flex items-center justify-between h-16 px-4">
-          <Link href="/" className="font-headline text-xl font-bold text-primary">MRMR</Link>
-          <nav className="flex items-center gap-4">
-             <Button variant="ghost" asChild>
-                <Link href="/">Home</Link>
-             </Button>
-             <Button variant="ghost" asChild>
-                <Link href="/blog">Blog</Link>
-             </Button>
-             <Button asChild variant="outline">
-                <Link href="/">
-                  <Home className="mr-2 h-4 w-4" />
-                  Back to CV
-                </Link>
-              </Button>
-          </nav>
-        </div>
-      </header>
-
+    <div className="bg-background text-foreground">
       <main className="container mx-auto max-w-7xl px-4 py-8">
          <div className="mb-12 text-center">
             <h1 className="font-headline text-4xl md:text-5xl font-bold text-primary">
