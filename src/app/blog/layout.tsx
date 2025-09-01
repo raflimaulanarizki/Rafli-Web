@@ -24,7 +24,7 @@ export default function BlogLayout({
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
           <Link href="/">
-            <Image src="/logo.svg" alt="MRMR Logo" width={40} height={40} />
+            <Image src="/logo.svg" alt="MRMR Logo" width={40} height={40} className="rounded-full shadow-lg" />
           </Link>
           <div className="flex items-center gap-2">
             <Button variant="ghost" size="icon" onClick={toggleTheme}>
