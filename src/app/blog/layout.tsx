@@ -1,36 +1,21 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
-import { Moon, Sun, Search, Menu, X, Rss, Home } from 'lucide-react';
+import { Moon, Sun, Search, Menu, Rss, Home } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import Link from 'next/link';
+import { useTheme } from 'next-themes';
 
 export default function BlogLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const [theme, setTheme] = useState('dark');
-
-  useEffect(() => {
-    // On mount, read the theme from localStorage
-    const storedTheme = localStorage.getItem('theme');
-    if (storedTheme) {
-      setTheme(storedTheme);
-    }
-  }, []);
-
-  useEffect(() => {
-    // When theme changes, update body class and localStorage
-    document.documentElement.classList.remove('light', 'dark');
-    document.documentElement.classList.add(theme);
-    localStorage.setItem('theme', theme);
-  }, [theme]);
+  const { setTheme, theme } = useTheme();
 
   const toggleTheme = () => {
-    setTheme(prevTheme => (prevTheme === 'dark' ? 'light' : 'dark'));
+    setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
   return (

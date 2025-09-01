@@ -7,7 +7,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { useState, useEffect } from "react";
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
@@ -20,6 +19,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
+import { useTheme } from "next-themes";
 
 const contactFormSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -185,28 +185,11 @@ export default function CrateCvPage() {
     resolver: zodResolver(contactFormSchema),
     defaultValues: { name: "", email: "", message: "" },
   });
-
-  const [theme, setTheme] = useState('dark');
-
-  useEffect(() => {
-    // On mount, read the theme from localStorage
-    const storedTheme = localStorage.getItem('theme');
-    if (storedTheme) {
-      setTheme(storedTheme);
-    }
-  }, []);
-
-  useEffect(() => {
-    // When theme changes, update body class and localStorage
-    document.documentElement.classList.remove('light', 'dark');
-    document.documentElement.classList.add(theme);
-    localStorage.setItem('theme', theme);
-  }, [theme]);
+  const { setTheme, theme } = useTheme();
 
   const toggleTheme = () => {
-    setTheme(prevTheme => (prevTheme === 'dark' ? 'light' : 'dark'));
+    setTheme(theme === 'dark' ? 'light' : 'dark');
   };
-
 
   function onSubmit(values: z.infer<typeof contactFormSchema>) {
     console.log(values);
