@@ -171,6 +171,8 @@ export default function BlogSearchComponent({ initialPosts }: { initialPosts: an
                         height={400}
                         data-ai-hint={post.dataAiHint}
                         className="w-full h-auto object-cover"
+                        placeholder="blur"
+                        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
                       />
                   </Link>
                   <CardContent className="p-6">

@@ -397,10 +397,25 @@ export default function CrateCvPageClient() {
                 </CardHeader>
                 <CardContent className="flex flex-col sm:flex-row flex-wrap gap-4 items-center justify-center">
                 <a href="https://holopin.io/@raflimaulanarizki" target="_blank" rel="noopener noreferrer">
-                    <Image src="https://holopin.me/raflimaulanarizki" alt="An image of @raflimaulanarizki's Holopin badges, which is a link to view their full Holopin profile" width={400} height={100} className="w-full max-w-xs sm:max-w-sm md:max-w-md"/>
+                    <Image 
+                        src="https://holopin.me/raflimaulanarizki" 
+                        alt="An image of @raflimaulanarizki's Holopin badges, which is a link to view their full Holopin profile" 
+                        width={400} 
+                        height={100} 
+                        className="w-full max-w-xs sm:max-w-sm md:max-w-md"
+                        placeholder="blur"
+                        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+                    />
                 </a>
                 <a href="https://ipv6.he.net/certification/" target="_blank" rel="noopener noreferrer">
-                    <Image src="https://ipv6.he.net/certification/create_badge.php?pass_name=raflimaulanarizki&badge=2" alt="IPv6 Certification Badge" width={250} height={150} />
+                    <Image 
+                        src="https://ipv6.he.net/certification/create_badge.php?pass_name=raflimaulanarizki&badge=2" 
+                        alt="IPv6 Certification Badge" 
+                        width={250} 
+                        height={150}
+                        placeholder="blur"
+                        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+                    />
                 </a>
                 </CardContent>
             </Card>

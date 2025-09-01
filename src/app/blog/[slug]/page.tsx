@@ -60,6 +60,8 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                         height={400}
                         data-ai-hint={post.dataAiHint}
                         className="w-full rounded-t-lg shadow-lg object-cover"
+                        placeholder="blur"
+                        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
                     />
                 </div>
                 <CardContent className="p-6 md:p-8">
