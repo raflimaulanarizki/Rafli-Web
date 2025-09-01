@@ -1,7 +1,8 @@
+
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Award, Briefcase, Building, Calendar, CheckCircle, ChevronsRight, Dna, GraduationCap, Github, Languages, Linkedin, Mail, Server, Smartphone, Link as LinkIcon, ExternalLink, Router, Network, ShieldCheck, Star, FolderKanban, Medal } from "lucide-react";
+import { Award, Briefcase, Building, Calendar, CheckCircle, ChevronsRight, Dna, GraduationCap, Github, Languages, Linkedin, Mail, Server, Smartphone, Link as LinkIcon, ExternalLink, Router, Network, ShieldCheck, Star, FolderKanban, Medal, Rss } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
@@ -210,7 +211,7 @@ export default function CrateCvPage() {
             <div className="mt-4 flex flex-col sm:flex-row sm:justify-center md:justify-start items-center gap-x-4 gap-y-2 text-sm text-muted-foreground">
               <a href="mailto:raflimaulanarizki8@gmail.com" className="flex items-center gap-2 hover:text-primary"><Mail className="h-4 w-4" /> raflimaulanarizki8@gmail.com</a>
               <a href="https://linkedin.com/in/raflimaulanarizki" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-primary"><Linkedin className="h-4 w-4" /> raflimaulanarizki</a>
-              <a href="https://github.com/raflimaulana" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-primary"><Github className="h-4 w-4" /> raflimaulana</a>
+              <a href="https://github.com/raflimaulanarizki" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-primary"><Github className="h-4 w-4" /> raflimaulana</a>
             </div>
           </div>
         </header>
@@ -389,10 +390,14 @@ export default function CrateCvPage() {
         <div className="container mx-auto flex flex-col items-center justify-between gap-4 text-center md:flex-row">
           <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} Muhamad Rafli Maulana Rizki. All Rights Reserved.</p>
           <div className="flex items-center gap-4">
+            <Link href="/blog" className="text-sm text-muted-foreground transition-colors hover:text-primary flex items-center gap-1">
+              <Rss className="h-4 w-4" />
+              Blog
+            </Link>
             <Link href="https://www.linkedin.com/in/raflimaulanarizki" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
               <Linkedin className="h-6 w-6 text-muted-foreground transition-colors hover:text-primary" />
             </Link>
-            <Link href="https://github.com/raflimaulana" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <Link href="https://github.com/raflimaulanarizki" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
               <Github className="h-6 w-6 text-muted-foreground transition-colors hover:text-primary" />
             </Link>
             <a href="mailto:raflimaulanarizki8@gmail.com" aria-label="Mail">
