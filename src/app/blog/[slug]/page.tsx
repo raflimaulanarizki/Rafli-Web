@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
 import React, { createElement, Fragment } from "react";
 import { notFound } from 'next/navigation';
+import { CodeBlockWrapper } from '@/components/ui/code-block';
 
 export async function generateStaticParams() {
   const paths = getAllPostIds();
@@ -97,7 +98,9 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                     </Card>
                 )}
 
-                <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} />
+                 <CodeBlockWrapper>
+                    <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} />
+                </CodeBlockWrapper>
             </article>
         </main>
     );

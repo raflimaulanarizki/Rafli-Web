@@ -94,11 +94,14 @@ export function getAllPostIds() {
 
 export async function getPostData(slugId: string): Promise<PostData> {
   const fullPath = path.join(postsDirectory, `${slugId}.md`);
+  if (!fs.existsSync(fullPath)) {
+      throw new Error('Post not found');
+  }
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const matterResult = matter(fileContents);
 
   const processedContent = await remark()
-    .use(html)
+    .use(html, { sanitize: false })
     .process(matterResult.content);
   const contentHtml = processedContent.toString();
 
@@ -109,7 +112,7 @@ export async function getPostData(slugId: string): Promise<PostData> {
     id: slugId,
     contentHtml,
     readTime,
-toc,
+    toc,
     ...matterResult.data,
   };
 }
