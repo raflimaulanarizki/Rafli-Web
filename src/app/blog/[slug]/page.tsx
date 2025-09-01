@@ -8,7 +8,8 @@ import Link from "next/link";
 import React, { createElement, Fragment } from "react";
 import { notFound } from 'next/navigation';
 import { unified } from 'unified';
-import rehypeParse from 'rehype-parse';
+import remarkParse from 'remark-parse';
+import remarkRehype from 'remark-rehype';
 import rehypeReact from 'rehype-react';
 import { CodeBlock } from '@/components/ui/code-block';
 
@@ -41,7 +42,8 @@ const renderToc = (items: TocEntry[]) => {
 }
 
 const contentProcessor = unified()
-    .use(rehypeParse, { fragment: true })
+    .use(remarkParse)
+    .use(remarkRehype)
     .use(rehypeReact, {
         createElement,
         Fragment,
@@ -63,7 +65,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
         notFound();
     }
 
-    const content = contentProcessor.processSync(post.contentHtml).result;
+    const content = contentProcessor.processSync(post.content).result;
 
 
     return (
