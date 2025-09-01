@@ -2,60 +2,38 @@
 author: "Muhamad Rafli Maulana Rizki"
 title: "Virtual Routing & Forwarding (VRF)"
 date: "2024-12-25"
-readTime: "6 minutes to read"
 image: "/images/virtual-routing-forwarding-vrf/vrf-diagram.png"
 dataAiHint: "network router"
 description: "Virtual Routing and Forwarding (VRF) adalah teknologi virtualisasi jaringan yang memungkinkan beberapa instance routing table terpisah berjalan di perangkat jaringan yang sama."
 tags : [
     "Cisco",
     "Network",
-    "VRF",
+    "VRF"
 ]
-toc:
-    - label: "Pendahuluan VRF"
-      href: "#pendahuluan-vrf"
-      children:
-        - label: "Tujuan dan Manfaat VRF"
-          href: "#tujuan-dan-manfaat-vrf"
-        - label: "Pengguna VRF"
-          href: "#pengguna-vrf"
-    - label: "Dasar-Dasar VRF"
-      href: "#dasar-dasar-vrf"
-      children:
-        - label: "Istilah dalam VRF"
-          href: "#istilah-dalam-vrf"
-        - label: "Tabel Routing dan Segmentasi dalam VRF"
-          href: "#tabel-routing-dan-segmentasi-dalam-vrf"
-        - label: "Perbandingan dengan Routing Tradisional"
-          href: "#perbandingan-dengan-routing-tradisional"
-    - label: "Contoh Konfigurasi"
-      href: "#contoh-konfigurasi"
-    - label: "Troubleshoot"
-      href: "#troubleshoot"
 ---
 
 ![VRF Diagram](/images/virtual-routing-forwarding-vrf/vrf-diagram.png)
 
-## 1. Pendahuluan VRF
+## Pendahuluan VRF
 
 Virtual Routing and Forwarding (VRF) adalah teknologi virtualisasi network yang memungkinkan beberapa instance routing table terpisah tetapi berjalan di perangkat jaringan yang sama. VRF memberikan kemampuan untuk memisahkan rute dan data antara berbagai network tanpa memerlukan hardware tambahan.
 
-### **a. Tujuan dan Manfaat VRF**
+### Tujuan dan Manfaat VRF
 
 - **Pemisahan Trafik:** Trafik dari berbagai jaringan dapat diisolasi secara logis, bahkan jika menggunakan perangkat yang sama karena VRF ini akan membuat beberapa routing table baru yang terpisah.
 - **Keamanan Jaringan:** VRF memberikan isolasi trafik yang membantu mencegah kebocoran data.
 - **Efisiensi Infrastruktur:** Mengurangi kebutuhan perangkat tambahan, mengoptimalkan pemanfaatan perangkat keras.
 - **Fleksibilitas Operasional:** Mendukung multi-tenancy untuk jaringan perusahaan atau penyedia layanan.
 
-### **b. Pengguna VRF**
+### Pengguna VRF
 
 - Jaringan penyedia layanan yang mendukung banyak pelanggan (multi-tenant).
 - Isolasi jaringan dalam perusahaan untuk divisi atau aplikasi yang berbeda.
 - Mendukung VPN Layer 3 di jaringan berbasis MPLS.
 
-## **2. Dasar-Dasar VRF**
+## Dasar-Dasar VRF
 
-### **a. Istilah dalam VRF**
+### Istilah dalam VRF
 
 1. **VRF Instance**
     
@@ -136,16 +114,16 @@ Virtual Routing and Forwarding (VRF) adalah teknologi virtualisasi network yang 
     - **Next Hop:** Alamat IP berikutnya dalam jalur routing.
     - **Interface:** Port atau interface fisik/logis yang digunakan untuk mengirimkan trafik.
 
-### **b. Tabel Routing dan Segmentasi dalam VRF**
+### Tabel Routing dan Segmentasi dalam VRF
 
 VRF memungkinkan segmentasi tabel routing sehingga rute dari satu VRF tidak terlihat oleh VRF lain. Hal ini memastikan isolasi penuh antar jaringan.
 
-### **c. Perbandingan dengan Routing Tradisional**
+### Perbandingan dengan Routing Tradisional
 
 - **Routing Tradisional:** Semua rute dikumpulkan dalam satu tabel routing.
 - **VRF:** Rute diisolasi ke tabel routing yang berbeda berdasarkan kebutuhan bisnis atau keamanan.
 
-## 3. Contoh Konfigurasi
+## Contoh Konfigurasi
 
 - **Contoh 1: Isolasi Rute Antar VRF**
     
@@ -215,7 +193,7 @@ VRF memungkinkan segmentasi tabel routing sehingga rute dari satu VRF tidak terl
     
     Lengkapnya bisa membuka materi MPLS-VPN
     
-## 4. Troubleshoot
+## Troubleshoot
 
 - `show ip vrf / show ip vrf detail` = Verifikasi Konfigurasi VRF mulai dari Nama instance VRF, RD, dan alokasi Interface VRF.
     

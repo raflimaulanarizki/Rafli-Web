@@ -1,5 +1,5 @@
 
-import { getPostData, getAllPostIds } from '@/lib/posts';
+import { getPostData, getAllPostIds, TocEntry } from '@/lib/posts';
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, Clock, User } from "lucide-react";
@@ -13,24 +13,26 @@ export async function generateStaticParams() {
   return paths;
 }
 
-const renderToc = (items: any[]) => {
+const renderToc = (items: TocEntry[]) => {
     if (!items || items.length === 0) return null;
-    return (
-        <ul className="space-y-2 list-disc list-inside">
-            {items.map(item => (
-                <li key={item.href}>
-                    <a href={item.href} className="hover:text-primary hover:underline">{item.label}</a>
-                    {item.children && (
-                        <ul className="pl-6 mt-2 space-y-1 list-['-_'] list-inside">
-                            {item.children.map((child: any) => (
-                                <li key={child.href}><a href={child.href} className="hover:text-primary hover:underline">{child.label}</a></li>
-                            ))}
-                        </ul>
-                    )}
-                </li>
-            ))}
-        </ul>
-    )
+
+    const createList = (items: TocEntry[], level: number) => {
+        const filteredItems = items.filter(item => item.level === level);
+        if (filteredItems.length === 0) return null;
+
+        return (
+            <ul className={level === 2 ? "space-y-2 list-disc list-inside" : "pl-6 mt-2 space-y-1 list-['-_'] list-inside"}>
+                {filteredItems.map(item => (
+                    <li key={item.href}>
+                        <a href={item.href} className="hover:text-primary hover:underline">{item.label}</a>
+                        {item.children && item.children.length > 0 && createList(item.children, level + 1)}
+                    </li>
+                ))}
+            </ul>
+        );
+    };
+    
+    return createList(items, 2);
 }
 
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {
@@ -47,7 +49,13 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
 
     // Function to add scroll-mt-20 to section headers
     const addScrollMarginToHeadings = (html: string) => {
-        return html.replace(/<h([1-6])/g, '<h$1 class="scroll-mt-20"');
+        return html.replace(/<h([1-6])(.*?)>/g, (match, level, attrs) => {
+            const existingId = attrs.match(/id="([^"]*)"/);
+            if (existingId) {
+                return `<h${level}${attrs} class="scroll-mt-20">`;
+            }
+            return match; // Should not happen if slugging works
+        });
     }
 
     const processedHtml = addScrollMarginToHeadings(post.contentHtml);
