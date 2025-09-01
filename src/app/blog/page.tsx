@@ -21,7 +21,7 @@ const blogPosts = [
     image: "https://picsum.photos/800/400?random=1",
     dataAiHint: "network virtualization",
     tags: ["Cisco", "Network", "VRF"],
-    link: "#"
+    slug: "virtual-routing-forwarding-vrf"
   },
   {
     title: "My Home Lab Setup: A Network Engineer's Playground",
@@ -32,7 +32,7 @@ const blogPosts = [
     image: "https://picsum.photos/800/400?random=2",
     dataAiHint: "server rack",
     tags: ["Proxmox", "Docker", "Homelab"],
-    link: "#"
+    slug: "my-home-lab-setup"
   },
   {
     title: "Securing Your Network with pfSense",
@@ -43,7 +43,7 @@ const blogPosts = [
     image: "https://picsum.photos/800/400?random=3",
     dataAiHint: "firewall security",
     tags: ["pfSense", "Security", "Firewall"],
-    link: "#"
+    slug: "securing-your-network-with-pfsense"
   },
   {
     title: "Qemu Guest Agent - Proxmox",
@@ -54,7 +54,7 @@ const blogPosts = [
     image: "https://picsum.photos/800/400?random=4",
     dataAiHint: "virtual machine",
     tags: ["System", "Proxmox"],
-    link: "#"
+    slug: "qemu-guest-agent-proxmox"
   },
   {
     title: "Postfix Send Email - Proxmox",
@@ -65,7 +65,7 @@ const blogPosts = [
     image: "https://picsum.photos/800/400?random=5",
     dataAiHint: "email server",
     tags: ["System", "Proxmox"],
-    link: "#"
+    slug: "postfix-send-email-proxmox"
   }
 ];
 
@@ -137,7 +137,7 @@ function BlogSearchComponent() {
             <div className="lg:col-span-2 space-y-8">
               {filteredPosts.length > 0 ? filteredPosts.map((post, index) => (
                 <Card key={index} className="flex flex-col overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                   <Link href={post.link} className="block">
+                   <Link href={`/blog/${post.slug}`} className="block">
                       <Image
                         src={post.image}
                         alt={post.title}
@@ -149,7 +149,7 @@ function BlogSearchComponent() {
                   </Link>
                   <CardContent className="p-6">
                     <h2 className="font-headline text-2xl font-bold mb-2">
-                      <Link href={post.link} className="hover:text-primary hover:underline">
+                       <Link href={`/blog/${post.slug}`} className="hover:text-primary hover:underline">
                         {highlightText(post.title, searchQuery)}
                       </Link>
                     </h2>
