@@ -44,7 +44,6 @@ const blogPosts = [
 ];
 
 const categories = ["System", "Pemrograman", "Syntax", "Themes", "VPN", "A Category with Slug"];
-const series = ["Themes Guide"];
 const allTags = ["Network", "Mikrotik", "Cisco", "Juniper", "Markdown", "Proxmox", "VRF", "Css", "CustomTag", "EIGRP"];
 
 
@@ -112,15 +111,6 @@ export default function BlogPage() {
                     </CardContent>
                 </Card>
                 
-                <Card>
-                    <CardContent className="p-6">
-                        <h3 className="font-headline text-lg font-semibold mb-4 flex items-center gap-2"><Bookmark className="h-5 w-5 text-primary"/>Series</h3>
-                         <div className="flex flex-wrap gap-2">
-                            {series.map(s => <Badge key={s} variant="outline">{s}</Badge>)}
-                        </div>
-                    </CardContent>
-                </Card>
-
                 <Card>
                     <CardContent className="p-6">
                         <h3 className="font-headline text-lg font-semibold mb-4 flex items-center gap-2"><Tag className="h-5 w-5 text-primary"/>Tags</h3>
