@@ -8,6 +8,7 @@ import Link from "next/link";
 import React from "react";
 import { notFound } from 'next/navigation';
 import { CodeBlockWrapper } from '@/components/ui/code-block';
+import Giscus from '@/components/Giscus';
 
 export async function generateStaticParams() {
   const paths = getAllPostIds();
@@ -109,6 +110,11 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                         </CodeBlockWrapper>
                     </article>
                 </CardContent>
+            </Card>
+            <Card className="mt-12">
+              <CardContent className="p-6">
+                <Giscus />
+              </CardContent>
             </Card>
         </main>
     );
