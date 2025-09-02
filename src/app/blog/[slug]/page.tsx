@@ -90,6 +90,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                             {post.tags.map((tag: string) => (
                                 <Link key={tag} href={`/blog?tag=${tag}`} passHref>
                                     <Badge variant="secondary" className="cursor-pointer hover:bg-primary/80"># {tag}</Badge>
+
                                 </Link>
                             ))}
                         </div>
